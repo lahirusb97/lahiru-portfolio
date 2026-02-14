@@ -19,9 +19,10 @@ export default function Home() {
       description:
         "Multi-Branch Eye Care Practice Management Platform cutting order processing 60%, reducing inventory errors by 95%, and providing 100% order visibility with advanced features for factory tracking, patient management, and financial reporting.",
       techs: [
-        { name: "Node.js", color: "emerald" },
+        { name: "Django", color: "emerald" },
         { name: "React", color: "cyan" },
-        { name: "MongoDB", color: "green" },
+        { name: "MySQL", color: "blue" },
+        { name: "Hostinger KVM", color: "indigo" },
       ],
       isFullShowcase: true,
       isBestWork: true,
@@ -33,9 +34,10 @@ export default function Home() {
       description:
         "A modern point-of-sale system designed for retail businesses with real-time inventory management, comprehensive reporting capabilities, and seamless payment processing. This platform helps business owners streamline their operations and gain valuable insights into their sales.",
       techs: [
-        { name: "Express.js", color: "blue" },
+        { name: "Electron.js", color: "blue" },
         { name: "Node.js", color: "emerald" },
-        { name: "React", color: "cyan" },
+        { name: "MySQL/PostgreSQL", color: "yellow" },
+        { name: "Hostinger KVM", color: "orange" },
       ],
       isFullShowcase: true,
     },
@@ -48,6 +50,8 @@ export default function Home() {
       techs: [
         { name: ".NET ASP", color: "purple" },
         { name: "React", color: "cyan" },
+        { name: "PostgreSQL", color: "blue" },
+        { name: "Digital Ocean", color: "teal" },
       ],
       isFullShowcase: true,
     },
@@ -186,7 +190,7 @@ export default function Home() {
                 onClick={() => setShowContact(true)}
                 className="mt-8 cursor-pointer rounded-lg border-2 border-zinc-400 px-6 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-zinc-300 transition-all hover:border-white hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] focus:outline-none focus:ring-2 focus:ring-zinc-400/50"
               >
-                Get In Touch
+                Contact Us
               </button>
             </div>
 
@@ -220,13 +224,16 @@ export default function Home() {
                     </p>
                     <div className="mt-auto flex flex-wrap gap-2 pt-4">
                       <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                        Node.js
+                        Django
                       </span>
                       <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
                         React
                       </span>
                       <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                        Django
+                        MySQL
+                      </span>
+                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
+                        Hostinger KVM
                       </span>
                     </div>
                   </div>
@@ -257,13 +264,16 @@ export default function Home() {
                   </p>
                   <div className="mt-auto flex flex-wrap gap-2 pt-4">
                     <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                      Express.js
+                      Electron.js
                     </span>
                     <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
                       Node.js
                     </span>
                     <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                      React
+                      MySQL/PostgreSQL
+                    </span>
+                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
+                      Hostinger KVM
                     </span>
                   </div>
                 </div>
@@ -297,6 +307,12 @@ export default function Home() {
                     </span>
                     <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
                       React
+                    </span>
+                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
+                      PostgreSQL
+                    </span>
+                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
+                      Digital Ocean
                     </span>
                   </div>
                 </div>

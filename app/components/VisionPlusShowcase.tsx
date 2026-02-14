@@ -116,6 +116,30 @@ const VisionPlusShowcase: React.FC = () => {
               </div>
             </div>
 
+            {/* Tech Stack Pills */}
+            <div className="flex flex-wrap justify-center gap-2 mb-12">
+              <div className="px-4 py-2 bg-green-500/20 backdrop-blur border border-green-500/40 rounded-full">
+                <p className="text-green-300 text-sm font-semibold">
+                  Django Backend
+                </p>
+              </div>
+              <div className="px-4 py-2 bg-cyan-500/20 backdrop-blur border border-cyan-500/40 rounded-full">
+                <p className="text-cyan-300 text-sm font-semibold">
+                  React Frontend
+                </p>
+              </div>
+              <div className="px-4 py-2 bg-blue-500/20 backdrop-blur border border-blue-500/40 rounded-full">
+                <p className="text-blue-300 text-sm font-semibold">
+                  MySQL Database
+                </p>
+              </div>
+              <div className="px-4 py-2 bg-indigo-500/20 backdrop-blur border border-indigo-500/40 rounded-full">
+                <p className="text-orange-300 text-sm font-semibold">
+                  Hostinger KVM
+                </p>
+              </div>
+            </div>
+
             {/* Dashboard Carousel Slider */}
             <div className="mx-auto max-w-3xl">
               <div className="relative">

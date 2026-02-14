@@ -116,6 +116,30 @@ const EyeCareSaaSShowcase: React.FC = () => {
               </div>
             </div>
 
+            {/* Tech Stack Pills */}
+            <div className="flex flex-wrap justify-center gap-2 mb-12">
+              <div className="px-4 py-2 bg-purple-500/20 backdrop-blur border border-purple-500/40 rounded-full">
+                <p className="text-purple-300 text-sm font-semibold">
+                  .NET ASP Backend
+                </p>
+              </div>
+              <div className="px-4 py-2 bg-cyan-500/20 backdrop-blur border border-cyan-500/40 rounded-full">
+                <p className="text-cyan-300 text-sm font-semibold">
+                  React Frontend
+                </p>
+              </div>
+              <div className="px-4 py-2 bg-blue-500/20 backdrop-blur border border-blue-500/40 rounded-full">
+                <p className="text-blue-300 text-sm font-semibold">
+                  PostgreSQL Database
+                </p>
+              </div>
+              <div className="px-4 py-2 bg-teal-500/20 backdrop-blur border border-teal-500/40 rounded-full">
+                <p className="text-teal-300 text-sm font-semibold">
+                  Digital Ocean Infrastructure
+                </p>
+              </div>
+            </div>
+
             {/* Dashboard Carousel Slider */}
             <div className="mx-auto max-w-3xl">
               <div className="relative">

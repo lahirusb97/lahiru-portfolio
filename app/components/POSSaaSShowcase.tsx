@@ -108,6 +108,30 @@ const POSSaaSShowcase: React.FC = () => {
               </div>
             </div>
 
+            {/* Tech Stack Pills */}
+            <div className="flex flex-wrap justify-center gap-2 mb-12">
+              <div className="px-4 py-2 bg-blue-500/20 backdrop-blur border border-blue-500/40 rounded-full">
+                <p className="text-blue-300 text-sm font-semibold">
+                  Electron.js Desktop
+                </p>
+              </div>
+              <div className="px-4 py-2 bg-green-500/20 backdrop-blur border border-green-500/40 rounded-full">
+                <p className="text-green-300 text-sm font-semibold">
+                  Node.js Backend
+                </p>
+              </div>
+              <div className="px-4 py-2 bg-yellow-500/20 backdrop-blur border border-yellow-500/40 rounded-full">
+                <p className="text-yellow-300 text-sm font-semibold">
+                  MySQL/PostgreSQL
+                </p>
+              </div>
+              <div className="px-4 py-2 bg-orange-500/20 backdrop-blur border border-orange-500/40 rounded-full">
+                <p className="text-orange-300 text-sm font-semibold">
+                  Hostinger KVM
+                </p>
+              </div>
+            </div>
+
             {/* Dashboard Carousel Slider */}
             <div className="mx-auto max-w-3xl">
               <div className="relative">
@@ -690,6 +714,30 @@ const POSSaaSShowcase: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-yellow-400 mt-2"></div>
+                    <div>
+                      <p className="text-white font-semibold">
+                        MySQL & PostgreSQL Database
+                      </p>
+                      <p className="text-sm text-gray-400">
+                        Dual database support for flexible data storage with ACID
+                        compliance and high availability options
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-orange-400 mt-2"></div>
+                    <div>
+                      <p className="text-white font-semibold">
+                        Hostinger KVM Hosting
+                      </p>
+                      <p className="text-sm text-gray-400">
+                        Dedicated KVM server providing reliable infrastructure
+                        with cost-effective pricing and predictable performance
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-purple-400 mt-2"></div>
                     <div>
                       <p className="text-white font-semibold">
@@ -702,7 +750,7 @@ const POSSaaSShowcase: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-orange-400 mt-2"></div>
+                    <div className="w-2 h-2 rounded-full bg-pink-400 mt-2"></div>
                     <div>
                       <p className="text-white font-semibold">
                         GitHub Releases Auto-Update
