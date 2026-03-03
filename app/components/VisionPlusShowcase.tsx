@@ -54,7 +54,10 @@ const VisionPlusShowcase: React.FC = () => {
 
   return (
     <PhotoProvider>
-      <div className="w-full bg-[#0b1020] text-zinc-100">
+      <div
+        id="showcase-container"
+        className="w-full bg-[#0b1020] text-zinc-100"
+      >
         {/* HERO SECTION */}
         <section
           id="hero"

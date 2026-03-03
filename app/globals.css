@@ -163,6 +163,132 @@ body {
   animation: scale-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+/* ============================================
+   PRINT STYLES FOR PDF EXPORT
+   ============================================ */
+@media print {
+  /* Preserve colors and backgrounds */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Page setup - allow more space */
+  @page {
+    size: A4;
+    margin: 1cm;
+  }
+
+  /* Reset any fixed positioning or overflow issues */
+  html,
+  body {
+    width: 100%;
+    height: auto;
+    overflow: visible !important;
+    background: #0b1020;
+  }
+
+  /* Remove modal/dialog constraints for print */
+  .fixed.inset-0,
+  .overflow-y-auto {
+    position: static !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  /* Hide UI elements */
+  .no-print,
+  button[aria-label="Close"],
+  button[aria-label="Export as PDF"],
+  button[aria-label="Previous image"],
+  button[aria-label="Next image"],
+  .animate-pulse,
+  nav,
+  .fixed,
+  .sticky {
+    display: none !important;
+  }
+
+  /* Ensure showcase container is fully visible */
+  #showcase-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    position: relative !important;
+  }
+
+  /* Allow sections to break across pages */
+  section {
+    page-break-inside: auto;
+    break-inside: auto;
+    position: relative !important;
+  }
+
+  /* Keep headings with their content */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Keep related content together when possible */
+  .mb-8,
+  .mb-12,
+  .mb-16 {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Ensure images print correctly */
+  img {
+    max-width: 100%;
+    height: auto !important;
+    page-break-inside: avoid;
+    display: block;
+  }
+
+  /* Remove all animations and transitions for print */
+  * {
+    animation: none !important;
+    transition: none !important;
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+  }
+
+  /* Remove backdrop effects that don't print well */
+  .backdrop-blur,
+  .backdrop-blur-sm {
+    backdrop-filter: none !important;
+  }
+
+  /* Ensure text remains visible */
+  .text-zinc-100,
+  .text-white {
+    color: #ffffff !important;
+  }
+
+  /* Fix any absolute/fixed positioning */
+  .absolute,
+  .fixed {
+    position: relative !important;
+  }
+
+  /* Ensure all content is rendered */
+  [data-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .bg-orb {
     animation: none;

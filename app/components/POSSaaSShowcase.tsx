@@ -45,7 +45,10 @@ const POSSaaSShowcase: React.FC = () => {
 
   return (
     <PhotoProvider>
-      <div className="w-full bg-[#0b1020] text-zinc-100">
+      <div
+        id="showcase-container"
+        className="w-full bg-[#0b1020] text-zinc-100"
+      >
         {/* HERO SECTION */}
         <section
           id="hero"
@@ -80,7 +83,7 @@ const POSSaaSShowcase: React.FC = () => {
             aria-hidden="true"
           />
 
-          <div className="max-w-4xl w-full text-center relative z-10">
+          <div className="max-w-4xl w-full text-centexr relative z-10">
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
               Zero-Cost POS SaaS Platform
             </h1>
@@ -720,8 +723,8 @@ const POSSaaSShowcase: React.FC = () => {
                         MySQL & PostgreSQL Database
                       </p>
                       <p className="text-sm text-gray-400">
-                        Dual database support for flexible data storage with ACID
-                        compliance and high availability options
+                        Dual database support for flexible data storage with
+                        ACID compliance and high availability options
                       </p>
                     </div>
                   </div>

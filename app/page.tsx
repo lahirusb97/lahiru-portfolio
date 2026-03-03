@@ -114,32 +114,17 @@ export default function Home() {
                 className="h-36 w-36 rounded-full border border-white/20 bg-white/5 object-cover shadow-[0_12px_40px_rgba(0,0,0,0.45)] sm:h-40 sm:w-40"
               />
               <p className="mt-3 text-sm font-medium tracking-[0.2em] text-zinc-200">
-                Lahiru Shiran
+                Hi I am Lahiru Shiran
               </p>
             </div>
             <h1 className="mt-6 text-xl font-semibold leading-tight text-white sm:text-xl md:text-3xl">
-              Software Engineer & Founder — running two live SaaS platforms and
-              a medical Eye Clinic enterprise ERP system
+              Software Engineer
             </h1>
 
             <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-zinc-300 sm:text-lg">
               Helping businesses build scalable, high-performance web
               applications that automate operations, improve efficiency, and
               support long-term growth.
-            </p>
-
-            <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-zinc-300">
-              Currently working as{" "}
-              <span className="font-semibold text-white">
-                Software Engineer
-              </span>{" "}
-              at{" "}
-              <span className="font-semibold text-white">$x4DigitalLabs</span>,
-              Sri Lanka, specializing in{" "}
-              <span className="text-cyan-400">Node.js</span>,{" "}
-              <span className="text-cyan-400">Next.js</span>,{" "}
-              <span className="text-cyan-400">Nest.js</span>, and{" "}
-              <span className="text-cyan-400">Golang</span> development.
             </p>
 
             <div className="mt-8 flex items-center justify-center gap-4 text-sm text-zinc-400">

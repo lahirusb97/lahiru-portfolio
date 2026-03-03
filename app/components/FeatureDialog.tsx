@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import VisionPlusShowcase from "./VisionPlusShowcase";
 import POSSaaSShowcase from "./POSSaaSShowcase";
 import EyeCareSaaSShowcase from "./EyeCareSaaSShowcase";
+import { exportShowcaseToPDF } from "../utils/pdf-export";
 
 type ProjectTech = {
   name: string;
@@ -34,6 +35,19 @@ export default function FeatureDialog({
   setSelectedProject,
   setMediaIndex,
 }: FeatureDialogProps) {
+  const [isExporting, setIsExporting] = useState(false);
+
+  const handlePDFExport = async () => {
+    if (selectedProject === null) return;
+    setIsExporting(true);
+    try {
+      const projectName = projectMedia[selectedProject]?.name || "Showcase";
+      await exportShowcaseToPDF(projectName);
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   if (selectedProject === null) {
     return null;
   }
@@ -59,29 +73,77 @@ export default function FeatureDialog({
         className="relative h-full w-full bg-[#0b1020] shadow-2xl overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button */}
-        <button
-          onClick={() => {
-            setSelectedProject(null);
-            setMediaIndex(0);
-          }}
-          className="sticky top-4 left-4 z-10 text-white hover:text-zinc-400 transition-colors float-right mr-4"
-          aria-label="Close"
-        >
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        {/* Top Action Buttons */}
+        <div className="sticky top-4 right-4 z-10 flex gap-3 justify-end mr-4">
+          {/* PDF Export Button */}
+          <button
+            onClick={handlePDFExport}
+            disabled={isExporting}
+            className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/40 text-blue-300 hover:bg-blue-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed backdrop-blur"
+            title="Export project showcase as PDF"
+            aria-label="Export as PDF"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
+            {isExporting ? (
+              <>
+                <svg
+                  className="h-5 w-5 animate-spin"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
+                </svg>
+                <span className="text-sm font-medium">Exporting...</span>
+              </>
+            ) : (
+              <>
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"
+                  />
+                </svg>
+                <span className="text-sm font-medium">Export PDF</span>
+              </>
+            )}
+          </button>
+
+          {/* Close Button */}
+          <button
+            onClick={() => {
+              setSelectedProject(null);
+              setMediaIndex(0);
+            }}
+            className="flex items-center justify-center h-10 w-10 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors backdrop-blur"
+            aria-label="Close"
+          >
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
 
         {/* Render appropriate showcase based on project */}
         {isVisionPlusShowcase ? (
