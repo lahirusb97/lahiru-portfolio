@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { FiLinkedin, FiGithub } from "react-icons/fi";
 import FeatureDialog from "./components/FeatureDialog";
+import { Meteors } from "@/components/ui/meteors";
 
 const scrollTo = (id: string) =>
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -70,32 +71,35 @@ export default function Home() {
       <div className="bg-dim" aria-hidden="true" />
 
       {/* Navbar */}
-      <nav className="fixed left-0 right-0 top-0 z-30 flex items-center justify-between border-b border-zinc-200 bg-white/80 px-8 py-4 backdrop-blur-md md:px-24">
+      <nav className="fixed left-0 right-0 top-0 z-30 flex items-center justify-between border-b border-zinc-200 bg-white/80 px-6 py-4 backdrop-blur-md md:px-24">
         <span className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-900">
           Lahiru<span className="text-orange-500">.</span>
         </span>
-        <div className="flex items-center gap-8 text-sm font-medium tracking-[0.15em] text-zinc-500">
-          <button
-            onClick={() => scrollTo("home")}
-            className="uppercase transition-colors hover:text-zinc-900"
-          >
-            Home
-          </button>
-          <button
-            onClick={() => scrollTo("about")}
-            className="uppercase transition-colors hover:text-zinc-900"
-          >
-            About Me
-          </button>
-          <button
-            onClick={() => scrollTo("projects")}
-            className="uppercase transition-colors hover:text-zinc-900"
-          >
-            Projects
-          </button>
+        <div className="flex items-center gap-4">
+          {/* Nav links — hidden on mobile, visible sm+ */}
+          <div className="hidden items-center gap-6 text-sm font-medium tracking-[0.15em] text-zinc-500 sm:flex md:gap-8">
+            <button
+              onClick={() => scrollTo("home")}
+              className="uppercase transition-colors hover:text-zinc-900"
+            >
+              Home
+            </button>
+            <button
+              onClick={() => scrollTo("about")}
+              className="uppercase transition-colors hover:text-zinc-900"
+            >
+              About Me
+            </button>
+            <button
+              onClick={() => scrollTo("projects")}
+              className="uppercase transition-colors hover:text-zinc-900"
+            >
+              Projects
+            </button>
+          </div>
           <button
             onClick={() => setShowContact(true)}
-            className="rounded-lg border border-orange-400 px-4 py-1.5 text-orange-500 transition-all hover:bg-orange-50 hover:text-orange-600"
+            className="rounded-lg border border-orange-400 px-4 py-1.5 text-sm font-medium text-orange-500 transition-all hover:bg-orange-50 hover:text-orange-600"
           >
             Contact
           </button>
@@ -105,33 +109,39 @@ export default function Home() {
       {/* Hero Section */}
       <section
         id="home"
-        className="relative z-10 flex min-h-screen flex-col items-center justify-center gap-12 overflow-hidden px-8 pt-20 md:flex-row md:px-24"
+        className="relative z-10 flex min-h-screen flex-col items-center justify-center gap-6 overflow-hidden px-6 pt-20 md:flex-row md:gap-12 md:px-24"
       >
-        {/* Dot grid background */}
-        <div className="hero-dot-grid" aria-hidden="true" />
+        {/* Meteors background */}
+        <div
+          className="absolute inset-0 z-0 overflow-hidden"
+          aria-hidden="true"
+        >
+          <Meteors number={20} minDuration={6} maxDuration={14} angle={215} />
+        </div>
+
         {/* Soft glow behind text */}
         <div className="hero-text-glow" aria-hidden="true" />
 
         {/* Left: Text content */}
-        <div className="relative z-10 flex flex-col items-center gap-6 md:flex-1 md:items-start">
-          <p className="hero-item-1 text-xs uppercase tracking-[0.35em] text-zinc-500 sm:text-sm">
+        <div className="relative z-10 flex flex-col items-center gap-4 md:flex-1 md:items-start md:gap-6">
+          <p className="hero-item-1 text-xs uppercase tracking-[0.35em] text-zinc-500">
             Hi, I am Lahiru Shiran
           </p>
 
           <div className="hero-item-2 hero-heading-wrap text-center md:text-left">
-            <h1 className="animate-text-gradient text-3xl font-bold leading-tight md:text-5xl">
+            <h1 className="animate-text-gradient text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
               Software Engineer
             </h1>
           </div>
 
-          <p className="hero-item-3 max-w-xl text-center text-base leading-7 text-zinc-600 md:text-left sm:text-lg">
+          <p className="hero-item-3 max-w-xl text-center text-sm leading-7 text-zinc-600 md:text-left md:text-base md:leading-8">
             Helping businesses build scalable, high-performance web applications
             that automate operations, improve efficiency, and support long-term
             growth.
           </p>
 
           {/* Tech badges */}
-          <div className="hero-item-4 flex flex-wrap items-center justify-center gap-3 text-sm text-zinc-600 md:justify-start">
+          <div className="hero-item-4 flex flex-wrap items-center justify-center gap-2 text-xs text-zinc-600 md:justify-start md:gap-3 md:text-sm">
             {["Node.js", "Next.js", ".NET ASP", "Django", "Golang"].map(
               (tech) => (
                 <span
@@ -140,21 +150,21 @@ export default function Home() {
                 >
                   {tech}
                 </span>
-              )
+              ),
             )}
           </div>
 
           {/* CTA Buttons */}
-          <div className="hero-item-5 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+          <div className="hero-item-5 flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-center md:justify-start">
             <button
               onClick={() => scrollTo("projects")}
-              className="animate-scale-pulse cursor-pointer rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500 px-8 py-3 text-sm font-semibold uppercase tracking-[0.15em] text-white shadow-lg transition-all hover:animate-none hover:from-yellow-400 hover:to-orange-400 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-400/50"
+              className="animate-scale-pulse w-full cursor-pointer rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500 px-8 py-3 text-sm font-semibold uppercase tracking-[0.15em] text-white shadow-lg transition-all hover:animate-none hover:from-yellow-400 hover:to-orange-400 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-400/50 sm:w-auto"
             >
               My Best Works
             </button>
             <button
               onClick={() => setShowContact(true)}
-              className="cursor-pointer rounded-lg border-2 border-zinc-400 px-8 py-3 text-sm font-semibold uppercase tracking-[0.15em] text-zinc-700 shadow-sm transition-all hover:border-zinc-700 hover:text-zinc-900 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-zinc-400/50"
+              className="w-full cursor-pointer rounded-lg border-2 border-zinc-400 px-8 py-3 text-sm font-semibold uppercase tracking-[0.15em] text-zinc-700 shadow-sm transition-all hover:border-zinc-700 hover:text-zinc-900 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-zinc-400/50 sm:w-auto"
             >
               Contact Me
             </button>
@@ -169,7 +179,7 @@ export default function Home() {
               className="rounded-lg p-2 text-zinc-500 transition-colors hover:text-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-400/50"
               aria-label="LinkedIn"
             >
-              <FiLinkedin size={24} />
+              <FiLinkedin size={22} />
             </a>
             <a
               href="https://github.com/lahirusb97"
@@ -178,20 +188,36 @@ export default function Home() {
               className="rounded-lg p-2 text-zinc-500 transition-colors hover:text-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-400/50"
               aria-label="GitHub"
             >
-              <FiGithub size={24} />
+              <FiGithub size={22} />
             </a>
           </div>
         </div>
 
-        {/* Right: Profile image */}
-        <div className="hero-item-2 relative z-10 flex flex-1 items-center justify-center">
+        {/* Right: Profile image — appears first on mobile via order */}
+        <div className="hero-item-2 relative z-10 order-first flex flex-1 items-center justify-center md:order-last">
+
+          {/* Gradient glow blob */}
+          <div className="absolute h-[260px] w-[260px] rounded-full bg-gradient-to-br from-blue-200/50 via-violet-200/40 to-orange-100/30 blur-3xl sm:h-[360px] sm:w-[360px] md:h-[500px] md:w-[500px]" />
+
+          {/* Concentric decorative rings */}
+          <div className="absolute h-[240px] w-[240px] rounded-full border border-indigo-300/30 sm:h-[320px] sm:w-[320px] md:h-[460px] md:w-[460px]" />
+          <div className="absolute h-[200px] w-[200px] rounded-full border border-violet-300/25 sm:h-[270px] sm:w-[270px] md:h-[390px] md:w-[390px]" />
+          <div className="absolute h-[164px] w-[164px] rounded-full border border-blue-300/30 sm:h-[220px] sm:w-[220px] md:h-[320px] md:w-[320px]" />
+
+          {/* Floating accent dots */}
+          <div className="absolute top-3 right-6 h-2 w-2 rounded-full bg-indigo-400/50 md:top-10 md:right-16 md:h-2.5 md:w-2.5" />
+          <div className="absolute bottom-6 left-6 h-1.5 w-1.5 rounded-full bg-orange-400/50 md:bottom-14 md:left-14 md:h-2 md:w-2" />
+          <div className="absolute top-10 left-3 h-1.5 w-1.5 rounded-full bg-violet-400/60 md:top-20 md:left-8" />
+          <div className="absolute bottom-3 right-5 h-1.5 w-1.5 rounded-full bg-blue-400/50 md:bottom-10 md:right-12" />
+
+          {/* Profile image */}
           <Image
-            src="/lahiru.jpg"
+            src="/lahiru-shiran.png"
             alt="Lahiru Shiran"
-            width={320}
-            height={320}
+            width={400}
+            height={400}
             priority
-            className="h-56 w-56 rounded-full border-4 border-white bg-zinc-100 object-cover shadow-xl sm:h-72 sm:w-72 md:h-80 md:w-80"
+            className="relative h-44 w-44 rounded-full border-4 border-white bg-zinc-100 object-cover shadow-2xl sm:h-64 sm:w-64 md:h-[360px] md:w-[360px]"
           />
         </div>
       </section>
@@ -353,7 +379,8 @@ export default function Home() {
                 </h3>
                 <p className="mt-3 text-sm leading-6 text-zinc-500">
                   A modern point-of-sale system designed for retail businesses
-                  with real-time inventory management and reporting capabilities.
+                  with real-time inventory management and reporting
+                  capabilities.
                 </p>
                 <div className="mt-auto flex flex-wrap gap-2 pt-4">
                   {[
@@ -404,7 +431,7 @@ export default function Home() {
                       >
                         {t}
                       </span>
-                    )
+                    ),
                   )}
                 </div>
               </div>
