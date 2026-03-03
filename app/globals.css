@@ -459,3 +459,33 @@ body {
     animation: none;
   }
 }
+
+/* ============================================
+   FOOTER RIPPLE
+   ============================================ */
+@keyframes footer-ripple {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(3.4);
+    opacity: 0;
+  }
+}
+
+.footer-ripple-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(249, 115, 22, 0.35);
+  animation: footer-ripple 3.2s ease-out infinite;
+  pointer-events: none;
+}
+.footer-ripple-ring:nth-child(2) { animation-delay: 0.8s; }
+.footer-ripple-ring:nth-child(3) { animation-delay: 1.6s; }
+.footer-ripple-ring:nth-child(4) { animation-delay: 2.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-ripple-ring { animation: none; }
+}

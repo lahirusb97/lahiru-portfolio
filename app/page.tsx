@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { FiLinkedin, FiGithub } from "react-icons/fi";
 import FeatureDialog from "./components/FeatureDialog";
+import ContactModal from "./components/ContactModal";
+import FooterContactForm from "./components/FooterContactForm";
 import { Meteors } from "@/components/ui/meteors";
 
 const scrollTo = (id: string) =>
@@ -109,7 +111,7 @@ export default function Home() {
       {/* Hero Section */}
       <section
         id="home"
-        className="relative z-10 flex min-h-screen flex-col items-center justify-center gap-6 overflow-hidden px-6 pt-20 md:flex-row md:gap-12 md:px-24"
+        className="relative z-10 flex min-h-screen flex-col items-center justify-center gap-6 overflow-hidden px-6 pt-20 md:flex-row md:gap-0 md:px-0"
       >
         {/* Meteors background */}
         <div
@@ -123,25 +125,27 @@ export default function Home() {
         <div className="hero-text-glow" aria-hidden="true" />
 
         {/* Left: Text content */}
-        <div className="relative z-10 flex flex-col items-center gap-4 md:flex-1 md:items-start md:gap-6">
-          <p className="hero-item-1 text-xs uppercase tracking-[0.35em] text-zinc-500">
+        <div className="relative z-10 flex flex-col items-center gap-4 md:flex-1 md:items-center md:gap-6 md:px-10 lg:px-16 xl:px-20">
+          <p className="hero-item-1 flex items-center gap-2 text-lg font-bold uppercase tracking-[0.3em] text-zinc-700">
+            <span className="h-px w-6 bg-orange-400" />
             Hi, I am Lahiru Shiran
+            <span className="h-px w-6 bg-orange-400" />
           </p>
 
-          <div className="hero-item-2 hero-heading-wrap text-center md:text-left">
+          <div className="hero-item-2 hero-heading-wrap text-center">
             <h1 className="animate-text-gradient text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
               Software Engineer
             </h1>
           </div>
 
-          <p className="hero-item-3 max-w-xl text-center text-sm leading-7 text-zinc-600 md:text-left md:text-base md:leading-8">
+          <p className="hero-item-3 max-w-xl text-center text-sm leading-7 text-zinc-600 md:text-base md:leading-8">
             Helping businesses build scalable, high-performance web applications
             that automate operations, improve efficiency, and support long-term
             growth.
           </p>
 
           {/* Tech badges */}
-          <div className="hero-item-4 flex flex-wrap items-center justify-center gap-2 text-xs text-zinc-600 md:justify-start md:gap-3 md:text-sm">
+          <div className="hero-item-4 flex flex-wrap items-center justify-center gap-2 text-xs text-zinc-600 md:gap-3 md:text-sm">
             {["Node.js", "Next.js", ".NET ASP", "Django", "Golang"].map(
               (tech) => (
                 <span
@@ -155,7 +159,7 @@ export default function Home() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="hero-item-5 flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-center md:justify-start">
+          <div className="hero-item-5 flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <button
               onClick={() => scrollTo("projects")}
               className="animate-scale-pulse w-full cursor-pointer rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500 px-8 py-3 text-sm font-semibold uppercase tracking-[0.15em] text-white shadow-lg transition-all hover:animate-none hover:from-yellow-400 hover:to-orange-400 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-400/50 sm:w-auto"
@@ -194,8 +198,7 @@ export default function Home() {
         </div>
 
         {/* Right: Profile image — appears first on mobile via order */}
-        <div className="hero-item-2 relative z-10 order-first flex flex-1 items-center justify-center md:order-last">
-
+        <div className="hero-item-2 relative z-10 order-first flex flex-1 items-center justify-center md:order-last md:px-10 lg:px-16 xl:px-20">
           {/* Gradient glow blob */}
           <div className="absolute h-[260px] w-[260px] rounded-full bg-gradient-to-br from-blue-200/50 via-violet-200/40 to-orange-100/30 blur-3xl sm:h-[360px] sm:w-[360px] md:h-[500px] md:w-[500px]" />
 
@@ -449,61 +452,105 @@ export default function Home() {
       />
 
       {/* Contact Modal */}
-      {showContact && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
-          <div className="relative mx-6 w-full max-w-md rounded-xl border border-zinc-200 bg-white p-8 shadow-2xl">
-            <button
-              onClick={() => setShowContact(false)}
-              className="absolute right-4 top-4 text-zinc-400 transition-colors hover:text-zinc-900"
-            >
-              ✕
-            </button>
-            <h3 className="text-2xl font-semibold text-zinc-900">
-              Get In Touch
-            </h3>
-            <p className="mt-2 text-sm text-zinc-500">
-              Let&apos;s connect and discuss how I can help your project.
+      {showContact && <ContactModal onClose={() => setShowContact(false)} />}
+
+      {/* Footer */}
+      <footer className="relative z-10">
+        {/* Upper band — ripple + visitor message */}
+        <div className="relative overflow-hidden border-t border-zinc-100 bg-gradient-to-b from-white to-zinc-50 px-6 py-24 text-center">
+          {/* Ripple rings */}
+          <div className="relative mx-auto mb-10 h-16 w-16">
+            <div className="footer-ripple-ring" />
+            <div className="footer-ripple-ring" />
+            <div className="footer-ripple-ring" />
+            <div className="footer-ripple-ring" />
+            {/* Center icon */}
+            <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 shadow-lg text-2xl">
+              👋
+            </div>
+          </div>
+
+          <div className="mx-auto w-full max-w-2xl">
+            <p className="text-xs uppercase tracking-[0.35em] text-zinc-400">
+              Thanks for visiting
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold text-zinc-900 sm:text-4xl">
+              Let&apos;s build something{" "}
+              <span className="bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+                great together.
+              </span>
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-zinc-500">
+              Whether you have a project in mind, a problem to solve, or just want
+              to say hi — my inbox is always open.
             </p>
 
-            <div className="mt-8 space-y-4">
-              <a
-                href="mailto:lahirushiranit@gmail.com"
-                className="flex items-center gap-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 transition-all hover:border-yellow-300 hover:bg-yellow-50"
-              >
-                <div className="text-xl">📧</div>
-                <div>
-                  <p className="text-xs uppercase tracking-wider text-zinc-400">
-                    Email
-                  </p>
-                  <p className="text-zinc-900">lahirushiranit@gmail.com</p>
-                </div>
-              </a>
-
-              <a
-                href="https://www.linkedin.com/in/lahirushiran/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 transition-all hover:border-blue-300 hover:bg-blue-50"
-              >
-                <div className="text-xl">💼</div>
-                <div>
-                  <p className="text-xs uppercase tracking-wider text-zinc-400">
-                    LinkedIn
-                  </p>
-                  <p className="text-zinc-900">linkedin.com/in/lahirushiran</p>
-                </div>
-              </a>
-            </div>
-
-            <button
-              onClick={() => setShowContact(false)}
-              className="mt-8 w-full rounded-lg border border-zinc-200 bg-zinc-100 px-4 py-2 text-sm font-semibold text-zinc-700 transition-all hover:bg-zinc-200"
-            >
-              Close
-            </button>
+            <FooterContactForm />
           </div>
         </div>
-      )}
+
+        {/* Bottom bar */}
+        <div className="border-t border-zinc-200 bg-white/80 px-6 py-8 md:px-24">
+          <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-5 md:flex-row md:items-center md:justify-between">
+            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-900">
+              Lahiru<span className="text-orange-500">.</span>
+            </span>
+
+            <div className="flex items-center gap-6 text-xs font-medium uppercase tracking-[0.15em] text-zinc-400">
+              <button
+                onClick={() => scrollTo("home")}
+                className="transition-colors hover:text-zinc-900"
+              >
+                Home
+              </button>
+              <button
+                onClick={() => scrollTo("about")}
+                className="transition-colors hover:text-zinc-900"
+              >
+                About
+              </button>
+              <button
+                onClick={() => scrollTo("projects")}
+                className="transition-colors hover:text-zinc-900"
+              >
+                Projects
+              </button>
+              <button
+                onClick={() => setShowContact(true)}
+                className="transition-colors hover:text-zinc-900"
+              >
+                Contact
+              </button>
+            </div>
+
+            <div className="flex flex-col items-center gap-2 md:items-end">
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://www.linkedin.com/in/lahirushiran/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="rounded-lg p-1.5 text-zinc-400 transition-colors hover:text-zinc-900"
+                >
+                  <FiLinkedin size={18} />
+                </a>
+                <a
+                  href="https://github.com/lahirusb97"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  className="rounded-lg p-1.5 text-zinc-400 transition-colors hover:text-zinc-900"
+                >
+                  <FiGithub size={18} />
+                </a>
+              </div>
+              <p className="text-xs text-zinc-400">
+                © {new Date().getFullYear()} Lahiru Shiran. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
