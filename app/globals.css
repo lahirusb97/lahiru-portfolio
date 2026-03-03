@@ -39,10 +39,10 @@ body {
   background:
     radial-gradient(
       circle at top,
-      rgba(11, 16, 32, 0.15),
-      rgba(11, 16, 32, 0.7) 60%
+      rgba(255, 255, 255, 0.2),
+      rgba(248, 250, 252, 0.5) 60%
     ),
-    linear-gradient(180deg, rgba(11, 16, 32, 0.1), rgba(11, 16, 32, 0.75));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(248, 250, 252, 0.3));
   z-index: 1;
   pointer-events: none;
 }
@@ -50,8 +50,8 @@ body {
 .bg-orb {
   position: absolute;
   border-radius: 40% 60% 55% 45% / 45% 45% 55% 55%;
-  filter: blur(56px);
-  opacity: 0.75;
+  filter: blur(72px);
+  opacity: 0.45;
   --orb-x: 0px;
   --orb-y: 0px;
   transform: translate3d(var(--orb-x), var(--orb-y), 0);
@@ -68,7 +68,7 @@ body {
   left: 50%;
   --orb-x: -240px;
   --orb-y: -200px;
-  background: radial-gradient(circle, #4f6b9b 0%, #4f6b9b 45%, #4f6b9b00 70%);
+  background: radial-gradient(circle, #93c5fd 0%, #93c5fd 45%, #93c5fd00 70%);
   animation-delay:
     -2s,
     -1s;
@@ -81,7 +81,7 @@ body {
   left: 50%;
   --orb-x: 200px;
   --orb-y: -140px;
-  background: radial-gradient(circle, #7a6ba8 0%, #7a6ba8 45%, #7a6ba800 70%);
+  background: radial-gradient(circle, #c4b5fd 0%, #c4b5fd 45%, #c4b5fd00 70%);
   animation-delay:
     -6s,
     -3s;
@@ -94,7 +94,7 @@ body {
   left: 50%;
   --orb-x: -220px;
   --orb-y: 180px;
-  background: radial-gradient(circle, #4f8b8b 0%, #4f8b8b 45%, #4f8b8b00 70%);
+  background: radial-gradient(circle, #6ee7b7 0%, #6ee7b7 45%, #6ee7b700 70%);
   animation-delay:
     -10s,
     -5s;
@@ -107,7 +107,7 @@ body {
   left: 50%;
   --orb-x: 220px;
   --orb-y: 200px;
-  background: radial-gradient(circle, #9b7b5f 0%, #9b7b5f 45%, #9b7b5f00 70%);
+  background: radial-gradient(circle, #fdba74 0%, #fdba74 45%, #fdba7400 70%);
   animation-delay:
     -14s,
     -7s;
@@ -161,6 +161,137 @@ body {
 
 .animate-scale-pulse {
   animation: scale-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ============================================
+   HERO TYPOGRAPHY ANIMATIONS
+   ============================================ */
+
+/* Dot grid background for hero */
+.hero-dot-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    rgba(100, 116, 139, 0.13) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(
+    ellipse 80% 70% at 50% 50%,
+    black 40%,
+    transparent 100%
+  );
+}
+
+/* Animated gradient text */
+@keyframes text-gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-text-gradient {
+  background: linear-gradient(
+    135deg,
+    #1e293b 0%,
+    #2563eb 20%,
+    #7c3aed 45%,
+    #ea580c 70%,
+    #1e293b 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-gradient-shift 8s ease infinite;
+}
+
+/* Staggered fade-in-up for hero elements */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-item-1 { animation: fade-in-up 0.65s ease 0.05s both; }
+.hero-item-2 { animation: fade-in-up 0.65s ease 0.2s  both; }
+.hero-item-3 { animation: fade-in-up 0.65s ease 0.35s both; }
+.hero-item-4 { animation: fade-in-up 0.65s ease 0.5s  both; }
+.hero-item-5 { animation: fade-in-up 0.65s ease 0.65s both; }
+.hero-item-6 { animation: fade-in-up 0.65s ease 0.8s  both; }
+
+/* Soft glow blob behind text */
+.hero-text-glow {
+  position: absolute;
+  width: 520px;
+  height: 320px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background: radial-gradient(
+    ellipse,
+    rgba(99, 102, 241, 0.08) 0%,
+    rgba(59, 130, 246, 0.06) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(40px);
+}
+
+/* Animated underline accent on h1 */
+.hero-heading-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-heading-wrap::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #f97316);
+  animation: underline-grow 1s ease 0.9s forwards;
+}
+
+@keyframes underline-grow {
+  to {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-text-gradient,
+  .hero-item-1, .hero-item-2, .hero-item-3,
+  .hero-item-4, .hero-item-5, .hero-item-6,
+  .hero-heading-wrap::after {
+    animation: none;
+  }
+  .animate-text-gradient {
+    -webkit-text-fill-color: initial;
+    background: none;
+    color: #1e293b;
+  }
+  .hero-heading-wrap::after {
+    width: 100%;
+  }
 }
 
 /* ============================================

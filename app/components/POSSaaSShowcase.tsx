@@ -47,13 +47,13 @@ const POSSaaSShowcase: React.FC = () => {
     <PhotoProvider>
       <div
         id="showcase-container"
-        className="w-full bg-[#0b1020] text-zinc-100"
+        className="w-full bg-slate-50 text-zinc-900"
       >
         {/* HERO SECTION */}
         <section
           id="hero"
           data-animate
-          className={`relative min-h-[600px] bg-[#0b1020] flex items-center justify-center px-6 py-20 transform transition-all duration-1000 overflow-hidden ${
+          className={`relative min-h-[600px] bg-slate-50 flex items-center justify-center px-6 py-20 transform transition-all duration-1000 overflow-hidden ${
             visibleSections.has("hero")
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-10"
@@ -64,27 +64,27 @@ const POSSaaSShowcase: React.FC = () => {
             className="absolute inset-0 pointer-events-none"
             aria-hidden="true"
           >
-            <span className="absolute top-[10%] left-[10%] w-[500px] h-[500px] rounded-full bg-blue-500/30 blur-[100px] animate-pulse" />
+            <span className="absolute top-[10%] left-[10%] w-[500px] h-[500px] rounded-full bg-blue-300/40 blur-[100px] animate-pulse" />
             <span
-              className="absolute top-[20%] right-[15%] w-[400px] h-[400px] rounded-full bg-purple-500/20 blur-[100px] animate-pulse"
+              className="absolute top-[20%] right-[15%] w-[400px] h-[400px] rounded-full bg-purple-300/30 blur-[100px] animate-pulse"
               style={{ animationDelay: "1s" }}
             />
             <span
-              className="absolute bottom-[10%] left-[20%] w-[450px] h-[450px] rounded-full bg-cyan-500/20 blur-[100px] animate-pulse"
+              className="absolute bottom-[10%] left-[20%] w-[450px] h-[450px] rounded-full bg-cyan-300/30 blur-[100px] animate-pulse"
               style={{ animationDelay: "2s" }}
             />
             <span
-              className="absolute bottom-[15%] right-[10%] w-[350px] h-[350px] rounded-full bg-indigo-500/25 blur-[100px] animate-pulse"
+              className="absolute bottom-[15%] right-[10%] w-[350px] h-[350px] rounded-full bg-indigo-300/30 blur-[100px] animate-pulse"
               style={{ animationDelay: "1.5s" }}
             />
           </div>
           <div
-            className="absolute inset-0 bg-[#0b1020]/40 backdrop-blur-sm"
+            className="absolute inset-0 bg-slate-50/40 backdrop-blur-sm"
             aria-hidden="true"
           />
 
           <div className="max-w-4xl w-full text-centexr relative z-10">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h1 className="text-5xl md:text-6xl font-bold text-zinc-900 mb-6">
               Zero-Cost POS SaaS Platform
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 mb-12">
@@ -94,18 +94,18 @@ const POSSaaSShowcase: React.FC = () => {
 
             {/* Impact Metrics Pills */}
             <div className="flex flex-wrap justify-center gap-4 mb-16">
-              <div className="px-6 py-3 bg-white/20 backdrop-blur border border-white/30 rounded-full">
-                <p className="text-white font-semibold">
+              <div className="px-6 py-3 bg-zinc-200 backdrop-blur border border-zinc-400 rounded-full">
+                <p className="text-zinc-900 font-semibold">
                   <span className="text-2xl">$0</span> Server Hosting Cost
                 </p>
               </div>
-              <div className="px-6 py-3 bg-white/20 backdrop-blur border border-white/30 rounded-full">
-                <p className="text-white font-semibold">
+              <div className="px-6 py-3 bg-zinc-200 backdrop-blur border border-zinc-400 rounded-full">
+                <p className="text-zinc-900 font-semibold">
                   <span className="text-2xl">10+</span> Active Retail Shops
                 </p>
               </div>
-              <div className="px-6 py-3 bg-white/20 backdrop-blur border border-white/30 rounded-full">
-                <p className="text-white font-semibold">
+              <div className="px-6 py-3 bg-zinc-200 backdrop-blur border border-zinc-400 rounded-full">
+                <p className="text-zinc-900 font-semibold">
                   <span className="text-2xl">Auto</span> Update System
                 </p>
               </div>
@@ -114,7 +114,7 @@ const POSSaaSShowcase: React.FC = () => {
             {/* Tech Stack Pills */}
             <div className="flex flex-wrap justify-center gap-2 mb-12">
               <div className="px-4 py-2 bg-blue-500/20 backdrop-blur border border-blue-500/40 rounded-full">
-                <p className="text-blue-300 text-sm font-semibold">
+                <p className="text-blue-700 text-sm font-semibold">
                   Electron.js Desktop
                 </p>
               </div>
@@ -124,12 +124,12 @@ const POSSaaSShowcase: React.FC = () => {
                 </p>
               </div>
               <div className="px-4 py-2 bg-yellow-500/20 backdrop-blur border border-yellow-500/40 rounded-full">
-                <p className="text-yellow-300 text-sm font-semibold">
+                <p className="text-yellow-700 text-sm font-semibold">
                   MySQL/PostgreSQL
                 </p>
               </div>
               <div className="px-4 py-2 bg-orange-500/20 backdrop-blur border border-orange-500/40 rounded-full">
-                <p className="text-orange-300 text-sm font-semibold">
+                <p className="text-orange-700 text-sm font-semibold">
                   Hostinger KVM
                 </p>
               </div>
@@ -158,9 +158,9 @@ const POSSaaSShowcase: React.FC = () => {
                       </div>
                     ))}
                     {/* Fullscreen Icon Overlay */}
-                    <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm p-2.5 rounded-lg border border-white/20 transition-all duration-300 pointer-events-none group-hover:scale-110">
+                    <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm p-2.5 rounded-lg border border-zinc-300 transition-all duration-300 pointer-events-none group-hover:scale-110">
                       <svg
-                        className="w-5 h-5 text-white"
+                        className="w-5 h-5 text-zinc-900"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -183,7 +183,7 @@ const POSSaaSShowcase: React.FC = () => {
                       prev === 0 ? dashboardSlides.length - 1 : prev - 1,
                     )
                   }
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition-all backdrop-blur"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-zinc-200 hover:bg-white/40 text-zinc-900 p-3 rounded-full transition-all backdrop-blur"
                 >
                   ←
                 </button>
@@ -193,7 +193,7 @@ const POSSaaSShowcase: React.FC = () => {
                       prev === dashboardSlides.length - 1 ? 0 : prev + 1,
                     )
                   }
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition-all backdrop-blur"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-zinc-200 hover:bg-white/40 text-zinc-900 p-3 rounded-full transition-all backdrop-blur"
                 >
                   →
                 </button>
@@ -218,9 +218,9 @@ const POSSaaSShowcase: React.FC = () => {
         </section>
 
         {/* FEATURES & PROBLEMS SOLVED SECTION */}
-        <section className="py-12 px-6 bg-[#0b1020] border-t border-gray-800">
+        <section className="py-12 px-6 bg-slate-50 border-t border-gray-800">
           <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-zinc-900 mb-4">
               Innovation & Architecture
             </h2>
             <p className="text-xl text-gray-400">
@@ -263,7 +263,7 @@ const POSSaaSShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p>
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           $50-200/month server costs
                         </span>{" "}
                         making POS systems unaffordable for small startups
@@ -272,7 +272,7 @@ const POSSaaSShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p>
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           Cloud-only systems
                         </span>{" "}
                         requiring constant internet—failing during network
@@ -282,7 +282,7 @@ const POSSaaSShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p>
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           Manual backup processes
                         </span>{" "}
                         leading to data loss during hardware failures
@@ -291,7 +291,7 @@ const POSSaaSShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p>
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           Expensive per-terminal licensing
                         </span>{" "}
                         preventing business scaling
@@ -336,7 +336,7 @@ const POSSaaSShowcase: React.FC = () => {
                   </h3>
                   <p className="text-gray-300 text-sm leading-relaxed mb-3">
                     Built an{" "}
-                    <span className="text-blue-300 font-semibold">
+                    <span className="text-blue-700 font-semibold">
                       Electron.js desktop application
                     </span>{" "}
                     that stores data locally (zero server dependency) while
@@ -349,13 +349,13 @@ const POSSaaSShowcase: React.FC = () => {
                     database hosting.
                   </p>
                   <div className="flex flex-wrap gap-2 text-xs">
-                    <span className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full font-semibold">
+                    <span className="px-3 py-1 bg-blue-500/20 text-blue-700 rounded-full font-semibold">
                       Offline-First
                     </span>
                     <span className="px-3 py-1 bg-green-500/20 text-green-300 rounded-full font-semibold">
                       Zero Hosting Cost
                     </span>
-                    <span className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full font-semibold">
+                    <span className="px-3 py-1 bg-purple-300/30 text-purple-700 rounded-full font-semibold">
                       Auto-Updates via GitHub
                     </span>
                   </div>
@@ -514,7 +514,7 @@ const POSSaaSShowcase: React.FC = () => {
                 <div className="flex-1">
                   <h3 className="text-orange-400 font-semibold text-lg mb-3 flex items-center gap-2">
                     Speed is Revenue
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-500/20 text-orange-300">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-500/20 text-orange-700">
                       UX Innovation
                     </span>
                   </h3>
@@ -524,7 +524,7 @@ const POSSaaSShowcase: React.FC = () => {
                         •
                       </span>
                       <p className="leading-relaxed">
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           30-45 second invoice time
                         </span>{" "}
                         in traditional POS systems slowing checkout—customers
@@ -536,7 +536,7 @@ const POSSaaSShowcase: React.FC = () => {
                         •
                       </span>
                       <p className="leading-relaxed">
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           Mouse-dependent workflows
                         </span>{" "}
                         forcing cashiers to constantly switch between keyboard
@@ -546,7 +546,7 @@ const POSSaaSShowcase: React.FC = () => {
                   </div>
                   <div className="mt-4 p-3 bg-black/30 rounded-lg border border-orange-500/20">
                     <p className="text-xs text-gray-400 leading-relaxed">
-                      <span className="text-orange-300 font-semibold">
+                      <span className="text-orange-700 font-semibold">
                         Design Philosophy:
                       </span>{" "}
                       Every second saved per invoice multiplies across hundreds
@@ -563,7 +563,7 @@ const POSSaaSShowcase: React.FC = () => {
             <div className="grid md:grid-cols-2 gap-4 mb-8">
               <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-5 rounded-xl border border-purple-500/20">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-purple-300/30 flex items-center justify-center">
                     <svg
                       className="w-5 h-5 text-purple-400"
                       fill="none"
@@ -583,7 +583,7 @@ const POSSaaSShowcase: React.FC = () => {
                   </h4>
                 </div>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  <span className="text-purple-300 font-semibold">
+                  <span className="text-purple-700 font-semibold">
                     Complete keyboard control
                   </span>{" "}
                   with shortcuts for add item, remove, discount, payment,
@@ -593,7 +593,7 @@ const POSSaaSShowcase: React.FC = () => {
 
               <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 p-5 rounded-xl border border-cyan-500/20">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-cyan-300/30 flex items-center justify-center">
                     <svg
                       className="w-5 h-5 text-cyan-400"
                       fill="none"
@@ -613,7 +613,7 @@ const POSSaaSShowcase: React.FC = () => {
                   </h4>
                 </div>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  <span className="text-cyan-300 font-semibold">
+                  <span className="text-cyan-700 font-semibold">
                     Input auto-focusing
                   </span>{" "}
                   anticipating next action—scan barcode, quantity auto-selected,
@@ -682,7 +682,7 @@ const POSSaaSShowcase: React.FC = () => {
           }`}
         >
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl font-bold text-white mb-16 text-center">
+            <h2 className="text-4xl font-bold text-zinc-900 mb-16 text-center">
               Technical Architecture & Business Impact
             </h2>
 
@@ -695,7 +695,7 @@ const POSSaaSShowcase: React.FC = () => {
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-blue-400 mt-2"></div>
                     <div>
-                      <p className="text-white font-semibold">
+                      <p className="text-zinc-900 font-semibold">
                         Electron.js Desktop App
                       </p>
                       <p className="text-sm text-gray-400">
@@ -707,7 +707,7 @@ const POSSaaSShowcase: React.FC = () => {
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-green-400 mt-2"></div>
                     <div>
-                      <p className="text-white font-semibold">
+                      <p className="text-zinc-900 font-semibold">
                         Node.js Express Backend
                       </p>
                       <p className="text-sm text-gray-400">
@@ -719,7 +719,7 @@ const POSSaaSShowcase: React.FC = () => {
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-yellow-400 mt-2"></div>
                     <div>
-                      <p className="text-white font-semibold">
+                      <p className="text-zinc-900 font-semibold">
                         MySQL & PostgreSQL Database
                       </p>
                       <p className="text-sm text-gray-400">
@@ -731,7 +731,7 @@ const POSSaaSShowcase: React.FC = () => {
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-orange-400 mt-2"></div>
                     <div>
-                      <p className="text-white font-semibold">
+                      <p className="text-zinc-900 font-semibold">
                         Hostinger KVM Hosting
                       </p>
                       <p className="text-sm text-gray-400">
@@ -743,7 +743,7 @@ const POSSaaSShowcase: React.FC = () => {
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-purple-400 mt-2"></div>
                     <div>
-                      <p className="text-white font-semibold">
+                      <p className="text-zinc-900 font-semibold">
                         Google Drive API Integration
                       </p>
                       <p className="text-sm text-gray-400">
@@ -755,7 +755,7 @@ const POSSaaSShowcase: React.FC = () => {
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-pink-400 mt-2"></div>
                     <div>
-                      <p className="text-white font-semibold">
+                      <p className="text-zinc-900 font-semibold">
                         GitHub Releases Auto-Update
                       </p>
                       <p className="text-sm text-gray-400">
@@ -775,7 +775,7 @@ const POSSaaSShowcase: React.FC = () => {
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-green-400 mt-2"></div>
                     <div>
-                      <p className="text-white font-semibold">
+                      <p className="text-zinc-900 font-semibold">
                         10+ Retail Shops Active
                       </p>
                       <p className="text-sm text-gray-400">
@@ -786,7 +786,7 @@ const POSSaaSShowcase: React.FC = () => {
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-blue-400 mt-2"></div>
                     <div>
-                      <p className="text-white font-semibold">
+                      <p className="text-zinc-900 font-semibold">
                         $0 Monthly Server Cost
                       </p>
                       <p className="text-sm text-gray-400">
@@ -797,7 +797,7 @@ const POSSaaSShowcase: React.FC = () => {
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-purple-400 mt-2"></div>
                     <div>
-                      <p className="text-white font-semibold">
+                      <p className="text-zinc-900 font-semibold">
                         Seamless Update Deployment
                       </p>
                       <p className="text-sm text-gray-400">
@@ -808,7 +808,7 @@ const POSSaaSShowcase: React.FC = () => {
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-yellow-400 mt-2"></div>
                     <div>
-                      <p className="text-white font-semibold">
+                      <p className="text-zinc-900 font-semibold">
                         Subscription Model Success
                       </p>
                       <p className="text-sm text-gray-400">
@@ -865,14 +865,14 @@ const POSSaaSShowcase: React.FC = () => {
         <section
           id="skills"
           data-animate
-          className={`py-20 px-6 bg-[#0b1020] transform transition-all duration-1000 ${
+          className={`py-20 px-6 bg-slate-50 transform transition-all duration-1000 ${
             visibleSections.has("skills")
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-10"
           }`}
         >
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl font-bold text-white mb-16 text-center">
+            <h2 className="text-4xl font-bold text-zinc-900 mb-16 text-center">
               Skills Demonstrated
             </h2>
 
@@ -1010,9 +1010,9 @@ const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
                         </div>
                       ))}
                       {/* Fullscreen Icon Overlay */}
-                      <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm p-2.5 rounded-lg border border-white/20 transition-all duration-300 pointer-events-none group-hover:scale-110">
+                      <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm p-2.5 rounded-lg border border-zinc-300 transition-all duration-300 pointer-events-none group-hover:scale-110">
                         <svg
-                          className="w-5 h-5 text-white"
+                          className="w-5 h-5 text-zinc-900"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -1026,7 +1026,7 @@ const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
                         </svg>
                       </div>
                       {/* Image Counter */}
-                      <div className="absolute bottom-3 right-4 text-xs text-white/80 bg-black/40 px-2 py-1 rounded-full">
+                      <div className="absolute bottom-3 right-4 text-xs text-zinc-900/80 bg-black/40 px-2 py-1 rounded-full">
                         {imageIndex + 1}/{imageSources.length}
                       </div>
                     </div>
@@ -1043,7 +1043,7 @@ const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
                           prev === 0 ? imageSources.length - 1 : prev - 1,
                         );
                       }}
-                      className="absolute -left-12 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-1.5 rounded-full transition-all backdrop-blur z-10"
+                      className="absolute -left-12 top-1/2 -translate-y-1/2 bg-zinc-200 hover:bg-white/40 text-zinc-900 p-1.5 rounded-full transition-all backdrop-blur z-10"
                       aria-label="Previous image"
                     >
                       <ChevronLeft className="w-4 h-4" />
@@ -1055,7 +1055,7 @@ const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
                           prev === imageSources.length - 1 ? 0 : prev + 1,
                         );
                       }}
-                      className="absolute -right-12 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-1.5 rounded-full transition-all backdrop-blur z-10"
+                      className="absolute -right-12 top-1/2 -translate-y-1/2 bg-zinc-200 hover:bg-white/40 text-zinc-900 p-1.5 rounded-full transition-all backdrop-blur z-10"
                       aria-label="Next image"
                     >
                       <ChevronRight className="w-4 h-4" />
@@ -1079,7 +1079,7 @@ const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
           <div
             className={`${isOdd ? "md:col-span-1" : "md:order-1 md:col-span-1"}`}
           >
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">
+            <h3 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-2">
               {title}
             </h3>
             <p className="text-lg text-gray-400 mb-8">{subtitle}</p>
@@ -1135,14 +1135,14 @@ const SkillCategory: React.FC<{
   color: "blue" | "cyan" | "purple";
 }> = ({ title, skills, color }) => {
   const colorMap = {
-    blue: "bg-blue-500/10 text-blue-300 border-blue-500/30",
-    cyan: "bg-cyan-500/10 text-cyan-300 border-cyan-500/30",
-    purple: "bg-purple-500/10 text-purple-300 border-purple-500/30",
+    blue: "bg-blue-50 text-blue-700 border-blue-500/30",
+    cyan: "bg-cyan-50 text-cyan-700 border-cyan-500/30",
+    purple: "bg-purple-50 text-purple-700 border-purple-500/30",
   };
 
   return (
     <div>
-      <h4 className="text-lg font-bold text-white mb-6">{title}</h4>
+      <h4 className="text-lg font-bold text-zinc-900 mb-6">{title}</h4>
       <div className="flex flex-wrap gap-3">
         {skills.map((skill, idx) => (
           <div

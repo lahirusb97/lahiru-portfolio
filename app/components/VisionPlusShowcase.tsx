@@ -56,13 +56,13 @@ const VisionPlusShowcase: React.FC = () => {
     <PhotoProvider>
       <div
         id="showcase-container"
-        className="w-full bg-[#0b1020] text-zinc-100"
+        className="w-full bg-slate-50 text-zinc-900"
       >
         {/* HERO SECTION */}
         <section
           id="hero"
           data-animate
-          className={`relative min-h-[600px] bg-[#0b1020] flex items-center justify-center px-6 py-20 transform transition-all duration-1000 overflow-hidden ${
+          className={`relative min-h-[600px] bg-slate-50 flex items-center justify-center px-6 py-20 transform transition-all duration-1000 overflow-hidden ${
             visibleSections.has("hero")
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-10"
@@ -73,27 +73,27 @@ const VisionPlusShowcase: React.FC = () => {
             className="absolute inset-0 pointer-events-none"
             aria-hidden="true"
           >
-            <span className="absolute top-[10%] left-[10%] w-[500px] h-[500px] rounded-full bg-blue-500/30 blur-[100px] animate-pulse" />
+            <span className="absolute top-[10%] left-[10%] w-[500px] h-[500px] rounded-full bg-blue-300/40 blur-[100px] animate-pulse" />
             <span
-              className="absolute top-[20%] right-[15%] w-[400px] h-[400px] rounded-full bg-purple-500/20 blur-[100px] animate-pulse"
+              className="absolute top-[20%] right-[15%] w-[400px] h-[400px] rounded-full bg-purple-300/30 blur-[100px] animate-pulse"
               style={{ animationDelay: "1s" }}
             />
             <span
-              className="absolute bottom-[10%] left-[20%] w-[450px] h-[450px] rounded-full bg-cyan-500/20 blur-[100px] animate-pulse"
+              className="absolute bottom-[10%] left-[20%] w-[450px] h-[450px] rounded-full bg-cyan-300/30 blur-[100px] animate-pulse"
               style={{ animationDelay: "2s" }}
             />
             <span
-              className="absolute bottom-[15%] right-[10%] w-[350px] h-[350px] rounded-full bg-indigo-500/25 blur-[100px] animate-pulse"
+              className="absolute bottom-[15%] right-[10%] w-[350px] h-[350px] rounded-full bg-indigo-300/30 blur-[100px] animate-pulse"
               style={{ animationDelay: "1.5s" }}
             />
           </div>
           <div
-            className="absolute inset-0 bg-[#0b1020]/40 backdrop-blur-sm"
+            className="absolute inset-0 bg-slate-50/40 backdrop-blur-sm"
             aria-hidden="true"
           />
 
           <div className="max-w-4xl w-full text-center relative z-10">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h1 className="text-5xl md:text-6xl font-bold text-zinc-900 mb-6">
               Vision Plus Eye Clinic Chain ERP System
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 mb-12">
@@ -102,18 +102,18 @@ const VisionPlusShowcase: React.FC = () => {
 
             {/* Impact Metrics Pills */}
             <div className="flex flex-wrap justify-center gap-4 mb-16">
-              <div className="px-6 py-3 bg-white/20 backdrop-blur border border-white/30 rounded-full">
-                <p className="text-white font-semibold">
+              <div className="px-6 py-3 bg-zinc-200 backdrop-blur border border-zinc-400 rounded-full">
+                <p className="text-zinc-900 font-semibold">
                   <span className="text-2xl">60%</span> Order Processing Speed
                 </p>
               </div>
-              <div className="px-6 py-3 bg-white/20 backdrop-blur border border-white/30 rounded-full">
-                <p className="text-white font-semibold">
+              <div className="px-6 py-3 bg-zinc-200 backdrop-blur border border-zinc-400 rounded-full">
+                <p className="text-zinc-900 font-semibold">
                   <span className="text-2xl">95%</span> Fewer Inventory Errors
                 </p>
               </div>
-              <div className="px-6 py-3 bg-white/20 backdrop-blur border border-white/30 rounded-full">
-                <p className="text-white font-semibold">
+              <div className="px-6 py-3 bg-zinc-200 backdrop-blur border border-zinc-400 rounded-full">
+                <p className="text-zinc-900 font-semibold">
                   <span className="text-2xl">100%</span> Order Visibility
                 </p>
               </div>
@@ -126,18 +126,18 @@ const VisionPlusShowcase: React.FC = () => {
                   Django Backend
                 </p>
               </div>
-              <div className="px-4 py-2 bg-cyan-500/20 backdrop-blur border border-cyan-500/40 rounded-full">
-                <p className="text-cyan-300 text-sm font-semibold">
+              <div className="px-4 py-2 bg-cyan-300/30 backdrop-blur border border-cyan-500/40 rounded-full">
+                <p className="text-cyan-700 text-sm font-semibold">
                   React Frontend
                 </p>
               </div>
               <div className="px-4 py-2 bg-blue-500/20 backdrop-blur border border-blue-500/40 rounded-full">
-                <p className="text-blue-300 text-sm font-semibold">
+                <p className="text-blue-700 text-sm font-semibold">
                   MySQL Database
                 </p>
               </div>
               <div className="px-4 py-2 bg-indigo-500/20 backdrop-blur border border-indigo-500/40 rounded-full">
-                <p className="text-orange-300 text-sm font-semibold">
+                <p className="text-orange-700 text-sm font-semibold">
                   Hostinger KVM
                 </p>
               </div>
@@ -166,9 +166,9 @@ const VisionPlusShowcase: React.FC = () => {
                       </div>
                     ))}
                     {/* Fullscreen Icon Overlay */}
-                    <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm p-2.5 rounded-lg border border-white/20 transition-all duration-300 pointer-events-none group-hover:scale-110">
+                    <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm p-2.5 rounded-lg border border-zinc-300 transition-all duration-300 pointer-events-none group-hover:scale-110">
                       <svg
-                        className="w-5 h-5 text-white"
+                        className="w-5 h-5 text-zinc-900"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -191,7 +191,7 @@ const VisionPlusShowcase: React.FC = () => {
                       prev === 0 ? dashboardSlides.length - 1 : prev - 1,
                     )
                   }
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition-all backdrop-blur"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-zinc-200 hover:bg-white/40 text-zinc-900 p-3 rounded-full transition-all backdrop-blur"
                 >
                   ←
                 </button>
@@ -201,7 +201,7 @@ const VisionPlusShowcase: React.FC = () => {
                       prev === dashboardSlides.length - 1 ? 0 : prev + 1,
                     )
                   }
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition-all backdrop-blur"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-zinc-200 hover:bg-white/40 text-zinc-900 p-3 rounded-full transition-all backdrop-blur"
                 >
                   →
                 </button>
@@ -226,9 +226,9 @@ const VisionPlusShowcase: React.FC = () => {
         </section>
 
         {/* FEATURES & PROBLEMS SOLVED SECTION */}
-        <section className="py-12 px-6 bg-[#0b1020] border-t border-gray-800">
+        <section className="py-12 px-6 bg-slate-50 border-t border-gray-800">
           <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-zinc-900 mb-4">
               Features & Problems Solved
             </h2>
             <p className="text-xl text-gray-400">
@@ -370,7 +370,7 @@ const VisionPlusShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p className="text-sm leading-relaxed">
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           22% no-show rate
                         </span>{" "}
                         costing the clinic significant daily revenue--patients
@@ -380,7 +380,7 @@ const VisionPlusShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p className="text-sm leading-relaxed">
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           Doctors waiting idle
                         </span>{" "}
                         while patients are late or stuck in traffic without
@@ -390,7 +390,7 @@ const VisionPlusShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p className="text-sm leading-relaxed">
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           Receptionists manually calling
                         </span>{" "}
                         patients after scheduled time--reactive, not preventive
@@ -399,7 +399,7 @@ const VisionPlusShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p className="text-sm leading-relaxed">
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           No systematic intervention
                         </span>{" "}
                         to rescue appointments before they became lost revenue
@@ -483,11 +483,11 @@ const VisionPlusShowcase: React.FC = () => {
                 <p className="text-gray-300 text-sm leading-relaxed">
                   System continuously monitors appointment status every 5
                   minutes. When{" "}
-                  <span className="font-mono text-yellow-400 bg-yellow-500/10 px-1 rounded">
+                  <span className="font-mono text-yellow-400 bg-yellow-50 px-1 rounded">
                     scheduled_time == current_time
                   </span>{" "}
                   AND{" "}
-                  <span className="font-mono text-yellow-400 bg-yellow-500/10 px-1 rounded">
+                  <span className="font-mono text-yellow-400 bg-yellow-50 px-1 rounded">
                     status != "Arrived"
                   </span>
                   , it immediately flags the appointment and triggers
@@ -550,7 +550,7 @@ const VisionPlusShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p>
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           5 order types processed identically
                         </span>{" "}
                         causing staff confusion and processing errors
@@ -559,7 +559,7 @@ const VisionPlusShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p>
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           Zero order progress visibility
                         </span>{" "}
                         staff manually calling to check "where is my order?"—no
@@ -569,7 +569,7 @@ const VisionPlusShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p>
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           Zero advance payment enforcement
                         </span>{" "}
                         tying up clinic capital for weeks
@@ -578,7 +578,7 @@ const VisionPlusShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p>
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           No audit trail on edits
                         </span>{" "}
                         enabling fraud and making disputes impossible
@@ -587,7 +587,7 @@ const VisionPlusShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p>
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           12% remake rate
                         </span>{" "}
                         from poor quality tracking and customer complaints
@@ -633,7 +633,7 @@ const VisionPlusShowcase: React.FC = () => {
                 </div>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   Created distinct invoice types for{" "}
-                  <span className="text-blue-300 font-semibold">
+                  <span className="text-blue-700 font-semibold">
                     Factory / Normal / Frame-Only / Hearing Aid / Soldering
                   </span>
                   —each with tailored fields eliminating confusion
@@ -673,7 +673,7 @@ const VisionPlusShowcase: React.FC = () => {
 
               <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-5 rounded-xl border border-purple-500/20">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-purple-300/30 flex items-center justify-center">
                     <svg
                       className="w-5 h-5 text-purple-400"
                       fill="none"
@@ -694,7 +694,7 @@ const VisionPlusShowcase: React.FC = () => {
                 </div>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   Every edit, payment, and status change{" "}
-                  <span className="text-purple-300 font-semibold">
+                  <span className="text-purple-700 font-semibold">
                     logged with user ID and timestamp
                   </span>
                   —ensuring accountability and preventing fraud
@@ -757,7 +757,7 @@ const VisionPlusShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p>
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           Zero stock visibility across 15 branches
                         </span>{" "}
                         causing lost sales (Branch A surplus while B runs out)
@@ -766,7 +766,7 @@ const VisionPlusShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p>
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           18% inventory variance
                         </span>{" "}
                         between system and physical count—"ghost inventory"
@@ -775,7 +775,7 @@ const VisionPlusShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p>
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           WhatsApp & Excel transfer tracking
                         </span>{" "}
                         creating disputes about who sent what, when
@@ -784,7 +784,7 @@ const VisionPlusShowcase: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <span className="text-red-400 font-bold mt-0.5">•</span>
                       <p>
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-zinc-900">
                           3-day investigation
                         </span>{" "}
                         to trace missing high-value items across locations
@@ -829,7 +829,7 @@ const VisionPlusShowcase: React.FC = () => {
                   </h3>
                   <p className="text-gray-300 text-sm leading-relaxed mb-3">
                     Built{" "}
-                    <span className="text-blue-300 font-semibold">
+                    <span className="text-blue-700 font-semibold">
                       item-level tracking system
                     </span>{" "}
                     where every frame/lens has a complete digital paper trail—
@@ -841,13 +841,13 @@ const VisionPlusShowcase: React.FC = () => {
                     current status.
                   </p>
                   <div className="flex flex-wrap gap-2 text-xs">
-                    <span className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full font-semibold">
+                    <span className="px-3 py-1 bg-blue-500/20 text-blue-700 rounded-full font-semibold">
                       Real-Time Sync
                     </span>
                     <span className="px-3 py-1 bg-green-500/20 text-green-300 rounded-full font-semibold">
                       Complete Traceability
                     </span>
-                    <span className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full font-semibold">
+                    <span className="px-3 py-1 bg-purple-300/30 text-purple-700 rounded-full font-semibold">
                       Zero Ghost Inventory
                     </span>
                   </div>
@@ -895,7 +895,7 @@ const VisionPlusShowcase: React.FC = () => {
           }`}
         >
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl font-bold text-white mb-16 text-center">
+            <h2 className="text-4xl font-bold text-zinc-900 mb-16 text-center">
               Skills Demonstrated
             </h2>
 
@@ -1036,9 +1036,9 @@ const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
                         </div>
                       ))}
                       {/* Fullscreen Icon Overlay */}
-                      <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm p-2.5 rounded-lg border border-white/20 transition-all duration-300 pointer-events-none group-hover:scale-110">
+                      <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm p-2.5 rounded-lg border border-zinc-300 transition-all duration-300 pointer-events-none group-hover:scale-110">
                         <svg
-                          className="w-5 h-5 text-white"
+                          className="w-5 h-5 text-zinc-900"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -1052,7 +1052,7 @@ const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
                         </svg>
                       </div>
                       {/* Image Counter */}
-                      <div className="absolute bottom-3 right-4 text-xs text-white/80 bg-black/40 px-2 py-1 rounded-full">
+                      <div className="absolute bottom-3 right-4 text-xs text-zinc-900/80 bg-black/40 px-2 py-1 rounded-full">
                         {imageIndex + 1}/{imageSources.length}
                       </div>
                     </div>
@@ -1069,7 +1069,7 @@ const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
                           prev === 0 ? imageSources.length - 1 : prev - 1,
                         );
                       }}
-                      className="absolute -left-12 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-1.5 rounded-full transition-all backdrop-blur z-10"
+                      className="absolute -left-12 top-1/2 -translate-y-1/2 bg-zinc-200 hover:bg-white/40 text-zinc-900 p-1.5 rounded-full transition-all backdrop-blur z-10"
                       aria-label="Previous image"
                     >
                       <ChevronLeft className="w-4 h-4" />
@@ -1081,7 +1081,7 @@ const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
                           prev === imageSources.length - 1 ? 0 : prev + 1,
                         );
                       }}
-                      className="absolute -right-12 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-1.5 rounded-full transition-all backdrop-blur z-10"
+                      className="absolute -right-12 top-1/2 -translate-y-1/2 bg-zinc-200 hover:bg-white/40 text-zinc-900 p-1.5 rounded-full transition-all backdrop-blur z-10"
                       aria-label="Next image"
                     >
                       <ChevronRight className="w-4 h-4" />
@@ -1105,7 +1105,7 @@ const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
           <div
             className={`${isOdd ? "md:col-span-1" : "md:order-1 md:col-span-1"}`}
           >
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">
+            <h3 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-2">
               {title}
             </h3>
             <p className="text-lg text-gray-400 mb-8">{subtitle}</p>
@@ -1160,9 +1160,9 @@ const TechCard: React.FC<{
   title: string;
   points: string[];
 }> = ({ icon, title, points }) => (
-  <div className="bg-gray-800 rounded-xl border border-gray-700 p-8 hover:border-blue-500/50 transition-colors">
+  <div className="bg-gray-800 rounded-xl border border-gray-700 p-8 hover:border-blue-300 transition-colors">
     <div className="text-5xl mb-4">{icon}</div>
-    <h3 className="text-xl font-bold text-white mb-4">{title}</h3>
+    <h3 className="text-xl font-bold text-zinc-900 mb-4">{title}</h3>
     <ul className="space-y-2">
       {points.map((point, idx) => (
         <li key={idx} className="flex gap-2 text-gray-300">
@@ -1212,14 +1212,14 @@ const SkillCategory: React.FC<{
   color: "blue" | "cyan" | "purple";
 }> = ({ title, skills, color }) => {
   const colorMap = {
-    blue: "bg-blue-500/10 text-blue-300 border-blue-500/30",
-    cyan: "bg-cyan-500/10 text-cyan-300 border-cyan-500/30",
-    purple: "bg-purple-500/10 text-purple-300 border-purple-500/30",
+    blue: "bg-blue-50 text-blue-700 border-blue-500/30",
+    cyan: "bg-cyan-50 text-cyan-700 border-cyan-500/30",
+    purple: "bg-purple-50 text-purple-700 border-purple-500/30",
   };
 
   return (
     <div>
-      <h4 className="text-lg font-bold text-white mb-6">{title}</h4>
+      <h4 className="text-lg font-bold text-zinc-900 mb-6">{title}</h4>
       <div className="flex flex-wrap gap-3">
         {skills.map((skill, idx) => (
           <div

@@ -52,7 +52,6 @@ export default function FeatureDialog({
     return null;
   }
 
-  // Check if this is a full showcase project
   const isFullShowcase =
     selectedProject >= 0 &&
     selectedProject < projectMedia.length &&
@@ -62,273 +61,189 @@ export default function FeatureDialog({
   const isEyeCareSaaSShowcase = selectedProject === 2 && isFullShowcase;
 
   return (
+    /* Backdrop — click outside to close */
     <div
-      className="fixed inset-0 z-50 flex h-full w-full items-stretch justify-center bg-black/80 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
       onClick={() => {
         setSelectedProject(null);
         setMediaIndex(0);
       }}
     >
+      {/* Dialog panel */}
       <div
-        className="relative h-full w-full bg-[#0b1020] shadow-2xl overflow-y-auto"
+        className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white shadow-2xl border border-zinc-200"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Top Action Buttons */}
-        <div className="sticky top-4 right-4 z-10 flex gap-3 justify-end mr-4">
-          {/* PDF Export Button */}
-          <button
-            onClick={handlePDFExport}
-            disabled={isExporting}
-            className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/40 text-blue-300 hover:bg-blue-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed backdrop-blur"
-            title="Export project showcase as PDF"
-            aria-label="Export as PDF"
-          >
-            {isExporting ? (
-              <>
-                <svg
-                  className="h-5 w-5 animate-spin"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                  />
-                </svg>
-                <span className="text-sm font-medium">Exporting...</span>
-              </>
-            ) : (
-              <>
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"
-                  />
-                </svg>
-                <span className="text-sm font-medium">Export PDF</span>
-              </>
-            )}
-          </button>
-
-          {/* Close Button */}
-          <button
-            onClick={() => {
-              setSelectedProject(null);
-              setMediaIndex(0);
-            }}
-            className="flex items-center justify-center h-10 w-10 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors backdrop-blur"
-            aria-label="Close"
-          >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+        {/* Sticky action bar */}
+        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-zinc-100 bg-white/95 backdrop-blur px-6 py-3">
+          <span className="text-sm font-semibold text-zinc-700 truncate">
+            {projectMedia[selectedProject]?.name}
+          </span>
+          <div className="flex items-center gap-2">
+            {/* PDF Export */}
+            <button
+              onClick={handlePDFExport}
+              disabled={isExporting}
+              className="flex items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-sm font-medium text-zinc-600 transition-all hover:border-zinc-300 hover:bg-zinc-100 disabled:cursor-not-allowed disabled:opacity-50"
+              aria-label="Export as PDF"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
+              {isExporting ? (
+                <>
+                  <svg
+                    className="h-4 w-4 animate-spin"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                    />
+                  </svg>
+                  <span>Exporting…</span>
+                </>
+              ) : (
+                <>
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"
+                    />
+                  </svg>
+                  <span>Export PDF</span>
+                </>
+              )}
+            </button>
+
+            {/* Close */}
+            <button
+              onClick={() => {
+                setSelectedProject(null);
+                setMediaIndex(0);
+              }}
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 bg-zinc-50 text-zinc-500 transition-all hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-900"
+              aria-label="Close"
+            >
+              <svg
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
 
-        {/* Render appropriate showcase based on project */}
-        {isVisionPlusShowcase ? (
-          <VisionPlusShowcase />
-        ) : isPOSSaaSShowcase ? (
-          <POSSaaSShowcase />
-        ) : isEyeCareSaaSShowcase ? (
-          <EyeCareSaaSShowcase />
-        ) : (
-          <div className="p-8">
-            {/* Traditional project showcase content */}
-            <div className="mb-8">
-              <div className="relative mb-4 h-96 w-full overflow-hidden rounded-lg bg-gradient-to-br from-white/5 to-white/10">
-                <div className="relative w-full h-full flex items-center justify-center bg-white/5 animate-pulse">
+        {/* Content */}
+        <div className="bg-slate-50">
+          {isVisionPlusShowcase ? (
+            <VisionPlusShowcase />
+          ) : isPOSSaaSShowcase ? (
+            <POSSaaSShowcase />
+          ) : isEyeCareSaaSShowcase ? (
+            <EyeCareSaaSShowcase />
+          ) : (
+            <div className="p-8">
+              <div className="mb-8">
+                <div className="relative mb-4 h-80 w-full overflow-hidden rounded-xl bg-zinc-100 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="text-6xl mb-4">🖼️</div>
-                    <p className="text-zinc-400">Image/Video Placeholder</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <button
-                  onClick={() => {
-                    const media = projectMedia[selectedProject];
-                    const totalMedia = media.images.length + 1;
-                    setMediaIndex(
-                      mediaIndex === 0 ? totalMedia - 1 : mediaIndex - 1,
-                    );
-                  }}
-                  className="flex items-center justify-center h-10 w-10 rounded-lg border border-white/10 bg-white/5 text-white hover:bg-white/10 transition-colors"
-                >
-                  <svg
-                    className="h-5 w-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-
-                <div className="flex items-center gap-3">
-                  <span className="text-sm text-zinc-400">
-                    {mediaIndex + 1} /{" "}
-                    {projectMedia[selectedProject].images.length + 1}
-                  </span>
-                  <div className="flex gap-2">
-                    {projectMedia[selectedProject].images.map((_, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setMediaIndex(idx)}
-                        className={`h-2 rounded-full transition-all ${
-                          mediaIndex === idx
-                            ? "w-6 bg-white"
-                            : "w-2 bg-white/30 hover:bg-white/50"
-                        }`}
-                      />
-                    ))}
-                    <button
-                      onClick={() =>
-                        setMediaIndex(
-                          projectMedia[selectedProject].images.length,
-                        )
-                      }
-                      className={`h-2 rounded-full transition-all ${
-                        mediaIndex ===
-                        projectMedia[selectedProject].images.length
-                          ? "w-6 bg-white"
-                          : "w-2 bg-white/30 hover:bg-white/50"
-                      }`}
-                      title="Video"
-                    />
+                    <div className="text-5xl mb-3">🖼️</div>
+                    <p className="text-zinc-400 text-sm">Image Placeholder</p>
                   </div>
                 </div>
 
-                <button
-                  onClick={() => {
-                    const media = projectMedia[selectedProject];
-                    const totalMedia = media.images.length + 1;
-                    setMediaIndex((mediaIndex + 1) % totalMedia);
-                  }}
-                  className="flex items-center justify-center h-10 w-10 rounded-lg border border-white/10 bg-white/5 text-white hover:bg-white/10 transition-colors"
-                >
-                  <svg
-                    className="h-5 w-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                <div className="flex items-center justify-between">
+                  <button
+                    onClick={() => {
+                      const media = projectMedia[selectedProject];
+                      const totalMedia = media.images.length + 1;
+                      setMediaIndex(
+                        mediaIndex === 0 ? totalMedia - 1 : mediaIndex - 1,
+                      );
+                    }}
+                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-500 hover:bg-zinc-50 transition-colors"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm text-zinc-400">
+                      {mediaIndex + 1} / {projectMedia[selectedProject].images.length + 1}
+                    </span>
+                    <div className="flex gap-2">
+                      {projectMedia[selectedProject].images.map((_, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setMediaIndex(idx)}
+                          className={`h-2 rounded-full transition-all ${
+                            mediaIndex === idx ? "w-6 bg-zinc-700" : "w-2 bg-zinc-300 hover:bg-zinc-400"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      const media = projectMedia[selectedProject];
+                      const totalMedia = media.images.length + 1;
+                      setMediaIndex((mediaIndex + 1) % totalMedia);
+                    }}
+                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-500 hover:bg-zinc-50 transition-colors"
+                  >
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
               </div>
+
+              {projectMedia[selectedProject] && (
+                <>
+                  <h2 className="text-2xl font-bold text-zinc-900">
+                    {projectMedia[selectedProject].name}
+                  </h2>
+                  <p className="mt-3 text-base leading-7 text-zinc-600">
+                    {projectMedia[selectedProject].description}
+                  </p>
+                  <div className="mt-6">
+                    <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-zinc-400">
+                      Tech Stack
+                    </h3>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {projectMedia[selectedProject].techs.map((tech) => (
+                        <span
+                          key={tech.name}
+                          className="rounded-full border border-zinc-200 bg-white px-4 py-1.5 text-sm text-zinc-700 shadow-sm"
+                        >
+                          {tech.name}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
-
-            {selectedProject === 0 && (
-              <>
-                <h2 className="text-3xl font-bold text-white">
-                  {projectMedia[0].name}
-                </h2>
-                <p className="mt-4 text-base leading-7 text-zinc-300">
-                  {projectMedia[0].description}
-                </p>
-                <div className="mt-6">
-                  <h3 className="text-sm font-semibold uppercase tracking-[0.15em] text-zinc-400">
-                    Tech Stack
-                  </h3>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {projectMedia[0].techs.map((tech) => (
-                      <span
-                        key={tech.name}
-                        className={`rounded-full border border-${tech.color}-500/50 bg-${tech.color}-500/10 px-4 py-2 text-sm text-${tech.color}-300`}
-                      >
-                        {tech.name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </>
-            )}
-
-            {selectedProject === 1 && (
-              <>
-                <h2 className="text-3xl font-bold text-white">
-                  {projectMedia[1].name}
-                </h2>
-                <p className="mt-4 text-base leading-7 text-zinc-300">
-                  {projectMedia[1].description}
-                </p>
-                <div className="mt-6">
-                  <h3 className="text-sm font-semibold uppercase tracking-[0.15em] text-zinc-400">
-                    Tech Stack
-                  </h3>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {projectMedia[1].techs.map((tech) => (
-                      <span
-                        key={tech.name}
-                        className={`rounded-full border border-${tech.color}-500/50 bg-${tech.color}-500/10 px-4 py-2 text-sm text-${tech.color}-300`}
-                      >
-                        {tech.name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </>
-            )}
-
-            {selectedProject === 2 && (
-              <>
-                <h2 className="text-3xl font-bold text-white">
-                  {projectMedia[2].name}
-                </h2>
-                <p className="mt-4 text-base leading-7 text-zinc-300">
-                  {projectMedia[2].description}
-                </p>
-                <div className="mt-6">
-                  <h3 className="text-sm font-semibold uppercase tracking-[0.15em] text-zinc-400">
-                    Tech Stack
-                  </h3>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {projectMedia[2].techs.map((tech) => (
-                      <span
-                        key={tech.name}
-                        className={`rounded-full border border-${tech.color}-500/50 bg-${tech.color}-500/10 px-4 py-2 text-sm text-${tech.color}-300`}
-                      >
-                        {tech.name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

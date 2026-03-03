@@ -5,8 +5,10 @@ import { useState } from "react";
 import { FiLinkedin, FiGithub } from "react-icons/fi";
 import FeatureDialog from "./components/FeatureDialog";
 
+const scrollTo = (id: string) =>
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
 export default function Home() {
-  const [slideIndex, setSlideIndex] = useState(0);
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [mediaIndex, setMediaIndex] = useState(0);
   const [showContact, setShowContact] = useState(false);
@@ -58,7 +60,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden bg-[#0b1020] text-zinc-100">
+    <div className="relative min-h-screen w-full overflow-x-hidden bg-slate-50 text-zinc-900">
       <div className="bg-orbs" aria-hidden="true">
         <span className="bg-orb orb-1" />
         <span className="bg-orb orb-2" />
@@ -67,245 +69,349 @@ export default function Home() {
       </div>
       <div className="bg-dim" aria-hidden="true" />
 
-      <nav className="absolute left-1/2 top-6 z-20 flex -translate-x-1/2 items-center gap-10 text-sm font-medium tracking-[0.2em] text-zinc-300 sm:text-base">
-        <button
-          className={`cursor-pointer transition-all ${
-            slideIndex === 0
-              ? "border-b-2 border-white text-white"
-              : "border-b-2 border-transparent text-zinc-400 hover:text-zinc-100"
-          }`}
-          type="button"
-          onClick={() => setSlideIndex(0)}
-        >
-          About Me
-        </button>
-        <button
-          className={`cursor-pointer transition-all ${
-            slideIndex === 1
-              ? "border-b-2 border-white text-white"
-              : "border-b-2 border-transparent text-zinc-400 hover:text-zinc-100"
-          }`}
-          type="button"
-          onClick={() => setSlideIndex(1)}
-        >
-          My Works
-        </button>
+      {/* Navbar */}
+      <nav className="fixed left-0 right-0 top-0 z-30 flex items-center justify-between border-b border-zinc-200 bg-white/80 px-8 py-4 backdrop-blur-md md:px-24">
+        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-900">
+          Lahiru<span className="text-orange-500">.</span>
+        </span>
+        <div className="flex items-center gap-8 text-sm font-medium tracking-[0.15em] text-zinc-500">
+          <button
+            onClick={() => scrollTo("home")}
+            className="uppercase transition-colors hover:text-zinc-900"
+          >
+            Home
+          </button>
+          <button
+            onClick={() => scrollTo("about")}
+            className="uppercase transition-colors hover:text-zinc-900"
+          >
+            About Me
+          </button>
+          <button
+            onClick={() => scrollTo("projects")}
+            className="uppercase transition-colors hover:text-zinc-900"
+          >
+            Projects
+          </button>
+          <button
+            onClick={() => setShowContact(true)}
+            className="rounded-lg border border-orange-400 px-4 py-1.5 text-orange-500 transition-all hover:bg-orange-50 hover:text-orange-600"
+          >
+            Contact
+          </button>
+        </div>
       </nav>
 
-      <main
-        className="relative z-10 flex h-full w-[200vw] transition-transform duration-700 ease-in-out"
-        style={{ transform: `translateX(-${slideIndex * 100}vw)` }}
+      {/* Hero Section */}
+      <section
+        id="home"
+        className="relative z-10 flex min-h-screen flex-col items-center justify-center gap-12 overflow-hidden px-8 pt-20 md:flex-row md:px-24"
       >
-        <section
-          id="about"
-          className="flex h-full w-screen items-center justify-center px-6"
-        >
-          <div className="max-w-2xl text-center">
-            <p className="text-xs uppercase tracking-[0.35em] text-zinc-400 sm:text-sm">
-              About Me
-            </p>
-            <div className="mt-6 flex flex-col items-center">
-              <Image
-                src="/lahiru.jpg"
-                alt="Lahiru Shiran"
-                width={240}
-                height={240}
-                priority
-                className="h-36 w-36 rounded-full border border-white/20 bg-white/5 object-cover shadow-[0_12px_40px_rgba(0,0,0,0.45)] sm:h-40 sm:w-40"
-              />
-              <p className="mt-3 text-sm font-medium tracking-[0.2em] text-zinc-200">
-                Hi I am Lahiru Shiran
-              </p>
-            </div>
-            <h1 className="mt-6 text-xl font-semibold leading-tight text-white sm:text-xl md:text-3xl">
+        {/* Dot grid background */}
+        <div className="hero-dot-grid" aria-hidden="true" />
+        {/* Soft glow behind text */}
+        <div className="hero-text-glow" aria-hidden="true" />
+
+        {/* Left: Text content */}
+        <div className="relative z-10 flex flex-col items-center gap-6 md:flex-1 md:items-start">
+          <p className="hero-item-1 text-xs uppercase tracking-[0.35em] text-zinc-500 sm:text-sm">
+            Hi, I am Lahiru Shiran
+          </p>
+
+          <div className="hero-item-2 hero-heading-wrap text-center md:text-left">
+            <h1 className="animate-text-gradient text-3xl font-bold leading-tight md:text-5xl">
               Software Engineer
             </h1>
+          </div>
 
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-zinc-300 sm:text-lg">
-              Helping businesses build scalable, high-performance web
-              applications that automate operations, improve efficiency, and
-              support long-term growth.
-            </p>
+          <p className="hero-item-3 max-w-xl text-center text-base leading-7 text-zinc-600 md:text-left sm:text-lg">
+            Helping businesses build scalable, high-performance web applications
+            that automate operations, improve efficiency, and support long-term
+            growth.
+          </p>
 
-            <div className="mt-8 flex items-center justify-center gap-4 text-sm text-zinc-400">
-              <span className="rounded-full border border-white/10 px-3 py-1 transition-all hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-                Node.js
-              </span>
-              <span className="rounded-full border border-white/10 px-3 py-1 transition-all hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-                Next.js
-              </span>
-              <span className="rounded-full border border-white/10 px-3 py-1 transition-all hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-                .NET ASP
-              </span>
-              <span className="rounded-full border border-white/10 px-3 py-1 transition-all hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-                Django
-              </span>
-              <span className="rounded-full border border-white/10 px-3 py-1 transition-all hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-                Golang
-              </span>
-            </div>
+          {/* Tech badges */}
+          <div className="hero-item-4 flex flex-wrap items-center justify-center gap-3 text-sm text-zinc-600 md:justify-start">
+            {["Node.js", "Next.js", ".NET ASP", "Django", "Golang"].map(
+              (tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full border border-zinc-200 bg-white px-3 py-1 shadow-sm transition-all hover:border-zinc-400 hover:shadow-md"
+                >
+                  {tech}
+                </span>
+              )
+            )}
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="hero-item-5 flex flex-wrap items-center justify-center gap-4 md:justify-start">
             <button
-              onClick={() => setSlideIndex(1)}
-              className="mt-10 cursor-pointer rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500 px-8 py-3 text-sm font-semibold uppercase tracking-[0.15em] text-gray-900 shadow-lg transition-all hover:from-yellow-400 hover:to-orange-400 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-400/50 animate-scale-pulse hover:animate-none"
+              onClick={() => scrollTo("projects")}
+              className="animate-scale-pulse cursor-pointer rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500 px-8 py-3 text-sm font-semibold uppercase tracking-[0.15em] text-white shadow-lg transition-all hover:animate-none hover:from-yellow-400 hover:to-orange-400 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-400/50"
             >
               My Best Works
             </button>
             <button
               onClick={() => setShowContact(true)}
-              className="ml-4 mt-4 cursor-pointer rounded-lg border-2 border-zinc-400 px-8 py-3 text-sm font-semibold uppercase tracking-[0.15em] text-zinc-300 shadow-lg transition-all hover:border-white hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] focus:outline-none focus:ring-2 focus:ring-zinc-400/50"
+              className="cursor-pointer rounded-lg border-2 border-zinc-400 px-8 py-3 text-sm font-semibold uppercase tracking-[0.15em] text-zinc-700 shadow-sm transition-all hover:border-zinc-700 hover:text-zinc-900 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-zinc-400/50"
             >
               Contact Me
             </button>
           </div>
-        </section>
 
-        <section
-          id="works"
-          className="flex h-full w-screen flex-col items-center justify-center overflow-y-auto px-6 py-16"
-        >
-          <div className="w-full max-w-6xl">
-            <div className="mb-12 text-center">
-              <p className="text-xs uppercase tracking-[0.35em] text-zinc-400 sm:text-sm">
-                My Works
+          {/* Social Icons */}
+          <div className="hero-item-6 flex items-center gap-2">
+            <a
+              href="https://www.linkedin.com/in/lahirushiran/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-lg p-2 text-zinc-500 transition-colors hover:text-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-400/50"
+              aria-label="LinkedIn"
+            >
+              <FiLinkedin size={24} />
+            </a>
+            <a
+              href="https://github.com/lahirusb97"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-lg p-2 text-zinc-500 transition-colors hover:text-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-400/50"
+              aria-label="GitHub"
+            >
+              <FiGithub size={24} />
+            </a>
+          </div>
+        </div>
+
+        {/* Right: Profile image */}
+        <div className="hero-item-2 relative z-10 flex flex-1 items-center justify-center">
+          <Image
+            src="/lahiru.jpg"
+            alt="Lahiru Shiran"
+            width={320}
+            height={320}
+            priority
+            className="h-56 w-56 rounded-full border-4 border-white bg-zinc-100 object-cover shadow-xl sm:h-72 sm:w-72 md:h-80 md:w-80"
+          />
+        </div>
+      </section>
+
+      {/* About Me Section */}
+      <section id="about" className="relative z-10 px-8 py-24 md:px-24">
+        <div className="mx-auto w-full max-w-6xl">
+          <div className="mb-12 text-center">
+            <p className="text-xs uppercase tracking-[0.35em] text-zinc-500 sm:text-sm">
+              About Me
+            </p>
+            <h2 className="mt-4 text-4xl font-semibold leading-tight text-zinc-900 sm:text-5xl">
+              Who I Am
+            </h2>
+          </div>
+
+          <div className="flex flex-col items-center gap-12 md:flex-row md:items-start">
+            {/* Left: intro text */}
+            <div className="flex flex-col gap-6 md:flex-1">
+              <p className="text-lg leading-8 text-zinc-700">
+                I&apos;m{" "}
+                <span className="font-semibold text-zinc-900">
+                  Lahiru Shiran
+                </span>
+                , a software engineer passionate about building products that
+                solve real-world problems. I specialize in full-stack web
+                development with a focus on performance, scalability, and clean
+                architecture.
               </p>
-              <h2 className="mt-5 text-4xl font-semibold leading-tight text-white sm:text-5xl md:text-6xl">
-                Featured projects.
-              </h2>
-              <button
-                onClick={() => setShowContact(true)}
-                className="mt-8 cursor-pointer rounded-lg border-2 border-zinc-400 px-6 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-zinc-300 transition-all hover:border-white hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] focus:outline-none focus:ring-2 focus:ring-zinc-400/50"
-              >
-                Contact Us
-              </button>
-            </div>
+              <p className="text-base leading-8 text-zinc-600">
+                Over the years I have delivered enterprise-grade systems for
+                healthcare, retail, and operations — from multi-branch ERP
+                platforms to SaaS applications used daily by businesses. I enjoy
+                working across the entire stack, from designing database schemas
+                to crafting polished user interfaces.
+              </p>
+              <p className="text-base leading-8 text-zinc-600">
+                When I&apos;m not building software, I&apos;m exploring new
+                technologies, contributing to open-source projects, and helping
+                teams adopt better engineering practices.
+              </p>
 
-            <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-3">
-              {/* Vision Plus ERP System - BEST WORK */}
-              <div className="relative">
-                {/* Best Work Badge */}
-                <div className="absolute -top-4 right-4 z-20 bg-gradient-to-r from-yellow-400 to-orange-400 text-gray-900 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg ">
-                  ⭐ Best Work
-                </div>
+              <div className="mt-2 flex flex-wrap gap-3">
                 <button
-                  onClick={() => setSelectedProject(0)}
-                  className="group cursor-pointer transform overflow-hidden rounded-lg border-2 border-yellow-400/60 bg-gradient-to-br from-yellow-500/5 to-orange-500/5 backdrop-blur transition-all duration-300 hover:border-yellow-300/80 hover:shadow-[0_0_40px_rgba(251,191,36,0.6)] hover:scale-105 flex h-full flex-col w-full"
+                  onClick={() => scrollTo("projects")}
+                  className="cursor-pointer rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500 px-6 py-2.5 text-sm font-semibold uppercase tracking-[0.1em] text-white transition-all hover:from-yellow-400 hover:to-orange-400 hover:shadow-lg"
                 >
-                  <div className="relative h-48 w-full bg-gradient-to-br from-green-500/20 to-emerald-500/20 flex items-center justify-center overflow-hidden">
-                    <Image
-                      src="/visionplus/visionplusfront.jpeg"
-                      alt="Vision Plus Storefront"
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col p-6 text-left">
-                    <h3 className="text-xl font-semibold text-white">
-                      Vision Plus Eye Clinic Chain - Enterprise ERP System
-                    </h3>
-                    <p className="mt-3 text-sm leading-6 text-zinc-400">
-                      Advanced multi-branch eye care management with factory
-                      order tracking, inventory optimization, and financial
-                      reporting.
-                    </p>
-                    <div className="mt-auto flex flex-wrap gap-2 pt-4">
-                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                        Django
-                      </span>
-                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                        React
-                      </span>
-                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                        MySQL
-                      </span>
-                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                        Hostinger KVM
-                      </span>
-                    </div>
-                  </div>
+                  View Projects
+                </button>
+                <button
+                  onClick={() => setShowContact(true)}
+                  className="cursor-pointer rounded-lg border border-zinc-400 px-6 py-2.5 text-sm font-semibold uppercase tracking-[0.1em] text-zinc-700 transition-all hover:border-zinc-700 hover:text-zinc-900"
+                >
+                  Get In Touch
                 </button>
               </div>
+            </div>
 
-              {/* POS SaaS App */}
-              <button
-                onClick={() => setSelectedProject(1)}
-                className="group cursor-pointer transform overflow-hidden rounded-lg border border-white/10 bg-white/5 backdrop-blur transition-all duration-300 hover:border-blue-400/60 hover:shadow-[0_0_30px_rgba(96,165,250,0.4)] hover:scale-105 flex h-full flex-col"
-              >
-                <div className="relative h-48 w-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center overflow-hidden">
-                  <Image
-                    src="/pos/poshome.png"
-                    alt="POS SaaS App"
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-6 text-left">
-                  <h3 className="text-xl font-semibold text-white">
-                    POS SaaS App
-                  </h3>
-                  <p className="mt-3 text-sm leading-6 text-zinc-400">
-                    A modern point-of-sale system designed for retail businesses
-                    with real-time inventory management and reporting
-                    capabilities.
-                  </p>
-                  <div className="mt-auto flex flex-wrap gap-2 pt-4">
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                      Electron.js
-                    </span>
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                      Node.js
-                    </span>
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                      MySQL/PostgreSQL
-                    </span>
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                      Hostinger KVM
-                    </span>
+            {/* Right: skills grid */}
+            <div className="w-full md:max-w-sm">
+              <p className="mb-4 text-xs uppercase tracking-[0.25em] text-zinc-400">
+                Tech Stack
+              </p>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { name: "Node.js", desc: "Backend / APIs" },
+                  { name: "Next.js", desc: "Full-stack React" },
+                  { name: "Django", desc: "Python web framework" },
+                  { name: ".NET ASP", desc: "Enterprise backend" },
+                  { name: "React", desc: "UI development" },
+                  { name: "Golang", desc: "High-performance services" },
+                  { name: "PostgreSQL", desc: "Relational database" },
+                  { name: "MySQL", desc: "Relational database" },
+                ].map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="rounded-lg border border-zinc-200 bg-white px-4 py-3 shadow-sm transition-all hover:border-zinc-300 hover:shadow-md"
+                  >
+                    <p className="text-sm font-medium text-zinc-900">
+                      {skill.name}
+                    </p>
+                    <p className="mt-0.5 text-xs text-zinc-500">{skill.desc}</p>
                   </div>
-                </div>
-              </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              {/* Eye Care Practice Management SaaS */}
+      {/* Projects Section */}
+      <section id="projects" className="relative z-10 px-8 py-24 md:px-24">
+        <div className="mx-auto w-full max-w-6xl">
+          <div className="mb-12 text-center">
+            <p className="text-xs uppercase tracking-[0.35em] text-zinc-500 sm:text-sm">
+              Projects
+            </p>
+            <h2 className="mt-5 text-4xl font-semibold leading-tight text-zinc-900 sm:text-5xl md:text-6xl">
+              Featured projects.
+            </h2>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-3">
+            {/* Vision Plus ERP System - BEST WORK */}
+            <div className="relative">
+              <div className="absolute -top-4 right-4 z-20 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-lg">
+                ⭐ Best Work
+              </div>
               <button
-                onClick={() => setSelectedProject(2)}
-                className="group cursor-pointer transform overflow-hidden rounded-lg border border-white/10 bg-white/5 backdrop-blur transition-all duration-300 hover:border-teal-400/60 hover:shadow-[0_0_30px_rgba(45,212,191,0.4)] hover:scale-105 flex h-full flex-col"
+                onClick={() => setSelectedProject(0)}
+                className="group flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-xl border-2 border-yellow-400/60 bg-white shadow-md transition-all duration-300 hover:scale-105 hover:border-yellow-400 hover:shadow-[0_8px_30px_rgba(251,191,36,0.35)]"
               >
-                <div className="relative h-48 w-full bg-gradient-to-br from-teal-500/20 to-cyan-500/20 flex items-center justify-center overflow-hidden">
+                <div className="relative flex h-48 w-full items-center justify-center overflow-hidden bg-gradient-to-br from-yellow-50 to-orange-50">
                   <Image
-                    src="/eyecare/prescriptionform.png"
-                    alt="Eye Care Prescription Form"
+                    src="/visionplus/visionplusfront.jpeg"
+                    alt="Vision Plus Storefront"
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-6 text-left">
-                  <h3 className="text-xl font-semibold text-white">
-                    Eye Care Practice Management SaaS
+                  <h3 className="text-xl font-semibold text-zinc-900">
+                    Vision Plus Eye Clinic Chain - Enterprise ERP System
                   </h3>
-                  <p className="mt-3 text-sm leading-6 text-zinc-400">
-                    Complete practice management system for eye clinics
-                    including patient Prescription records, appointment
-                    scheduling, and billing.
+                  <p className="mt-3 text-sm leading-6 text-zinc-500">
+                    Advanced multi-branch eye care management with factory order
+                    tracking, inventory optimization, and financial reporting.
                   </p>
                   <div className="mt-auto flex flex-wrap gap-2 pt-4">
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                      .NET ASP
-                    </span>
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                      React
-                    </span>
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                      PostgreSQL
-                    </span>
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-                      Digital Ocean
-                    </span>
+                    {["Django", "React", "MySQL", "Hostinger KVM"].map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-600"
+                      >
+                        {t}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </button>
             </div>
+
+            {/* POS SaaS App */}
+            <button
+              onClick={() => setSelectedProject(1)}
+              className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-md transition-all duration-300 hover:scale-105 hover:border-blue-300 hover:shadow-[0_8px_30px_rgba(96,165,250,0.25)]"
+            >
+              <div className="relative flex h-48 w-full items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 to-purple-50">
+                <Image
+                  src="/pos/poshome.png"
+                  alt="POS SaaS App"
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+              </div>
+              <div className="flex flex-1 flex-col p-6 text-left">
+                <h3 className="text-xl font-semibold text-zinc-900">
+                  POS SaaS App
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-zinc-500">
+                  A modern point-of-sale system designed for retail businesses
+                  with real-time inventory management and reporting capabilities.
+                </p>
+                <div className="mt-auto flex flex-wrap gap-2 pt-4">
+                  {[
+                    "Electron.js",
+                    "Node.js",
+                    "MySQL/PostgreSQL",
+                    "Hostinger KVM",
+                  ].map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-600"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </button>
+
+            {/* Eye Care Practice Management SaaS */}
+            <button
+              onClick={() => setSelectedProject(2)}
+              className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-md transition-all duration-300 hover:scale-105 hover:border-teal-300 hover:shadow-[0_8px_30px_rgba(45,212,191,0.25)]"
+            >
+              <div className="relative flex h-48 w-full items-center justify-center overflow-hidden bg-gradient-to-br from-teal-50 to-cyan-50">
+                <Image
+                  src="/eyecare/prescriptionform.png"
+                  alt="Eye Care Prescription Form"
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+              </div>
+              <div className="flex flex-1 flex-col p-6 text-left">
+                <h3 className="text-xl font-semibold text-zinc-900">
+                  Eye Care Practice Management SaaS
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-zinc-500">
+                  Complete practice management system for eye clinics including
+                  patient prescription records, appointment scheduling, and
+                  billing.
+                </p>
+                <div className="mt-auto flex flex-wrap gap-2 pt-4">
+                  {[".NET ASP", "React", "PostgreSQL", "Digital Ocean"].map(
+                    (t) => (
+                      <span
+                        key={t}
+                        className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-600"
+                      >
+                        {t}
+                      </span>
+                    )
+                  )}
+                </div>
+              </div>
+            </button>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
 
       <FeatureDialog
         projectMedia={projectMedia}
@@ -317,81 +423,60 @@ export default function Home() {
 
       {/* Contact Modal */}
       {showContact && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur">
-          <div className="relative mx-6 w-full max-w-md rounded-lg border border-white/20 bg-gradient-to-br from-zinc-900/95 to-zinc-800/95 p-8 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
+          <div className="relative mx-6 w-full max-w-md rounded-xl border border-zinc-200 bg-white p-8 shadow-2xl">
             <button
               onClick={() => setShowContact(false)}
-              className="absolute right-4 top-4 text-zinc-400 transition-colors hover:text-white"
+              className="absolute right-4 top-4 text-zinc-400 transition-colors hover:text-zinc-900"
             >
               ✕
             </button>
-            <h3 className="text-2xl font-semibold text-white">Get In Touch</h3>
-            <p className="mt-2 text-sm text-zinc-400">
-              Let's connect and discuss how I can help your project.
+            <h3 className="text-2xl font-semibold text-zinc-900">
+              Get In Touch
+            </h3>
+            <p className="mt-2 text-sm text-zinc-500">
+              Let&apos;s connect and discuss how I can help your project.
             </p>
 
             <div className="mt-8 space-y-4">
-              {/* Email */}
               <a
                 href="mailto:lahirushiranit@gmail.com"
-                className="flex items-center gap-4 rounded-lg border border-white/10 bg-white/5 p-4 transition-all hover:border-yellow-400/60 hover:bg-yellow-500/10"
+                className="flex items-center gap-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 transition-all hover:border-yellow-300 hover:bg-yellow-50"
               >
                 <div className="text-xl">📧</div>
                 <div>
                   <p className="text-xs uppercase tracking-wider text-zinc-400">
                     Email
                   </p>
-                  <p className="text-white">lahirushiranit@gmail.com</p>
+                  <p className="text-zinc-900">lahirushiranit@gmail.com</p>
                 </div>
               </a>
 
-              {/* LinkedIn */}
               <a
                 href="https://www.linkedin.com/in/lahirushiran/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 rounded-lg border border-white/10 bg-white/5 p-4 transition-all hover:border-blue-400/60 hover:bg-blue-500/10"
+                className="flex items-center gap-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 transition-all hover:border-blue-300 hover:bg-blue-50"
               >
                 <div className="text-xl">💼</div>
                 <div>
                   <p className="text-xs uppercase tracking-wider text-zinc-400">
                     LinkedIn
                   </p>
-                  <p className="text-white">linkedin.com/in/lahirushiran</p>
+                  <p className="text-zinc-900">linkedin.com/in/lahirushiran</p>
                 </div>
               </a>
             </div>
 
             <button
               onClick={() => setShowContact(false)}
-              className="mt-8 w-full rounded-lg bg-gradient-to-r from-zinc-700 to-zinc-600 px-4 py-2 text-sm font-semibold text-white transition-all hover:from-zinc-600 hover:to-zinc-500"
+              className="mt-8 w-full rounded-lg border border-zinc-200 bg-zinc-100 px-4 py-2 text-sm font-semibold text-zinc-700 transition-all hover:bg-zinc-200"
             >
               Close
             </button>
           </div>
         </div>
       )}
-
-      <footer className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-6">
-        <a
-          href="https://www.linkedin.com/in/lahirushiran/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-zinc-400 transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/50 rounded-lg p-2"
-          aria-label="LinkedIn"
-        >
-          <FiLinkedin size={24} />
-        </a>
-        <a
-          href="https://github.com/lahirusb97"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-zinc-400 transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/50 rounded-lg p-2"
-          aria-label="GitHub"
-        >
-          <FiGithub size={24} />
-        </a>
-      </footer>
     </div>
   );
 }
