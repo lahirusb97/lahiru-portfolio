@@ -63,7 +63,7 @@ export default function FeatureDialog({
   return (
     /* Backdrop — click outside to close */
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 bg-black/40 backdrop-blur-sm"
       onClick={() => {
         setSelectedProject(null);
         setMediaIndex(0);
@@ -71,7 +71,7 @@ export default function FeatureDialog({
     >
       {/* Dialog panel */}
       <div
-        className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white shadow-2xl border border-zinc-200"
+        className="relative w-full max-w-[96vw] max-h-[96vh] overflow-y-auto rounded-2xl bg-white shadow-2xl border border-zinc-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Sticky action bar */}

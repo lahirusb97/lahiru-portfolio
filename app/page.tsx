@@ -6,6 +6,7 @@ import { FiLinkedin, FiGithub } from "react-icons/fi";
 import FeatureDialog from "./components/FeatureDialog";
 import ContactModal from "./components/ContactModal";
 import FooterContactForm from "./components/FooterContactForm";
+import { CometCard } from "@/components/ui/comet-card";
 import { Meteors } from "@/components/ui/meteors";
 
 const scrollTo = (id: string) =>
@@ -82,19 +83,19 @@ export default function Home() {
           <div className="hidden items-center gap-6 text-sm font-medium tracking-[0.15em] text-zinc-500 sm:flex md:gap-8">
             <button
               onClick={() => scrollTo("home")}
-              className="uppercase transition-colors hover:text-zinc-900"
+              className="cursor-pointer uppercase transition-colors hover:text-zinc-900"
             >
               Home
             </button>
             <button
               onClick={() => scrollTo("about")}
-              className="uppercase transition-colors hover:text-zinc-900"
+              className="cursor-pointer uppercase transition-colors hover:text-zinc-900"
             >
               About Me
             </button>
             <button
               onClick={() => scrollTo("projects")}
-              className="uppercase transition-colors hover:text-zinc-900"
+              className="cursor-pointer uppercase transition-colors hover:text-zinc-900"
             >
               Projects
             </button>
@@ -138,7 +139,7 @@ export default function Home() {
             </h1>
           </div>
 
-          <p className="hero-item-3 max-w-xl text-center text-sm leading-7 text-zinc-600 md:text-base md:leading-8">
+          <p className="hero-item-3 max-w-xl text-center text-base leading-8 text-zinc-600 sm:text-lg sm:leading-9">
             Helping businesses build scalable, high-performance web applications
             that automate operations, improve efficiency, and support long-term
             growth.
@@ -323,25 +324,27 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-3">
+          <div className="grid items-stretch gap-10 md:grid-cols-1 lg:grid-cols-3">
+
             {/* Vision Plus ERP System - BEST WORK */}
-            <div className="relative">
-              <div className="absolute -top-4 right-4 z-20 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-lg">
-                ⭐ Best Work
-              </div>
+            <CometCard className="h-full">
               <button
                 onClick={() => setSelectedProject(0)}
-                className="group flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-xl border-2 border-yellow-400/60 bg-white shadow-md transition-all duration-300 hover:scale-105 hover:border-yellow-400 hover:shadow-[0_8px_30px_rgba(251,191,36,0.35)]"
+                className="group relative flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-2xl border-2 border-yellow-400/60 bg-white text-left"
               >
-                <div className="relative flex h-48 w-full items-center justify-center overflow-hidden bg-gradient-to-br from-yellow-50 to-orange-50">
+                {/* Best Work badge */}
+                <div className="absolute top-3 right-3 z-20 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-lg">
+                  ⭐ Best Work
+                </div>
+                <div className="relative h-48 w-full overflow-hidden bg-gradient-to-br from-yellow-50 to-orange-50">
                   <Image
                     src="/visionplus/visionplusfront.jpeg"
                     alt="Vision Plus Storefront"
                     fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
-                <div className="flex flex-1 flex-col p-6 text-left">
+                <div className="flex flex-1 flex-col p-6">
                   <h3 className="text-xl font-semibold text-zinc-900">
                     Vision Plus Eye Clinic Chain - Enterprise ERP System
                   </h3>
@@ -351,94 +354,79 @@ export default function Home() {
                   </p>
                   <div className="mt-auto flex flex-wrap gap-2 pt-4">
                     {["Django", "React", "MySQL", "Hostinger KVM"].map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-600"
-                      >
+                      <span key={t} className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-600">
                         {t}
                       </span>
                     ))}
                   </div>
                 </div>
               </button>
-            </div>
+            </CometCard>
 
             {/* POS SaaS App */}
-            <button
-              onClick={() => setSelectedProject(1)}
-              className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-md transition-all duration-300 hover:scale-105 hover:border-blue-300 hover:shadow-[0_8px_30px_rgba(96,165,250,0.25)]"
-            >
-              <div className="relative flex h-48 w-full items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 to-purple-50">
-                <Image
-                  src="/pos/poshome.png"
-                  alt="POS SaaS App"
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-6 text-left">
-                <h3 className="text-xl font-semibold text-zinc-900">
-                  POS SaaS App
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-zinc-500">
-                  A modern point-of-sale system designed for retail businesses
-                  with real-time inventory management and reporting
-                  capabilities.
-                </p>
-                <div className="mt-auto flex flex-wrap gap-2 pt-4">
-                  {[
-                    "Electron.js",
-                    "Node.js",
-                    "MySQL/PostgreSQL",
-                    "Hostinger KVM",
-                  ].map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-600"
-                    >
-                      {t}
-                    </span>
-                  ))}
+            <CometCard className="h-full">
+              <button
+                onClick={() => setSelectedProject(1)}
+                className="group relative flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white text-left"
+              >
+                <div className="relative h-48 w-full overflow-hidden bg-gradient-to-br from-blue-50 to-purple-50">
+                  <Image
+                    src="/pos/poshome.png"
+                    alt="POS SaaS App"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                 </div>
-              </div>
-            </button>
-
-            {/* Eye Care Practice Management SaaS */}
-            <button
-              onClick={() => setSelectedProject(2)}
-              className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-md transition-all duration-300 hover:scale-105 hover:border-teal-300 hover:shadow-[0_8px_30px_rgba(45,212,191,0.25)]"
-            >
-              <div className="relative flex h-48 w-full items-center justify-center overflow-hidden bg-gradient-to-br from-teal-50 to-cyan-50">
-                <Image
-                  src="/eyecare/prescriptionform.png"
-                  alt="Eye Care Prescription Form"
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-6 text-left">
-                <h3 className="text-xl font-semibold text-zinc-900">
-                  Eye Care Practice Management SaaS
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-zinc-500">
-                  Complete practice management system for eye clinics including
-                  patient prescription records, appointment scheduling, and
-                  billing.
-                </p>
-                <div className="mt-auto flex flex-wrap gap-2 pt-4">
-                  {[".NET ASP", "React", "PostgreSQL", "Digital Ocean"].map(
-                    (t) => (
-                      <span
-                        key={t}
-                        className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-600"
-                      >
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="text-xl font-semibold text-zinc-900">POS SaaS App</h3>
+                  <p className="mt-3 text-sm leading-6 text-zinc-500">
+                    A modern point-of-sale system designed for retail businesses
+                    with real-time inventory management and reporting capabilities.
+                  </p>
+                  <div className="mt-auto flex flex-wrap gap-2 pt-4">
+                    {["Electron.js", "Node.js", "MySQL/PostgreSQL", "Hostinger KVM"].map((t) => (
+                      <span key={t} className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-600">
                         {t}
                       </span>
-                    ),
-                  )}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </button>
+              </button>
+            </CometCard>
+
+            {/* Eye Care Practice Management SaaS */}
+            <CometCard className="h-full">
+              <button
+                onClick={() => setSelectedProject(2)}
+                className="group relative flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white text-left"
+              >
+                <div className="relative h-48 w-full overflow-hidden bg-gradient-to-br from-teal-50 to-cyan-50">
+                  <Image
+                    src="/eyecare/prescriptionform.png"
+                    alt="Eye Care Prescription Form"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="text-xl font-semibold text-zinc-900">
+                    Eye Care Practice Management SaaS
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-zinc-500">
+                    Complete practice management system for eye clinics including
+                    patient prescription records, appointment scheduling, and billing.
+                  </p>
+                  <div className="mt-auto flex flex-wrap gap-2 pt-4">
+                    {[".NET ASP", "React", "PostgreSQL", "Digital Ocean"].map((t) => (
+                      <span key={t} className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-600">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </button>
+            </CometCard>
+
           </div>
         </div>
       </section>
@@ -480,7 +468,7 @@ export default function Home() {
                 great together.
               </span>
             </h2>
-            <p className="mt-4 text-sm leading-7 text-zinc-500">
+            <p className="mt-4 text-base leading-8 text-zinc-600 sm:text-lg sm:leading-9">
               Whether you have a project in mind, a problem to solve, or just want
               to say hi — my inbox is always open.
             </p>
