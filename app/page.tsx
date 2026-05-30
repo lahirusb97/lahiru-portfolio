@@ -49,10 +49,18 @@ export default function Home() {
     },
     {
       name: "Eye Care Practice Management SaaS",
-      images: ["/eyecare/prescriptionform.png"],
+      images: [
+        "/eyecare/prescriptionform.png",
+        "/eyecare/appointment.png",
+        "/eyecare/factory-order-form.png",
+        "/eyecare/inventory-management.png",
+        "/eyecare/payment-report.png",
+        "/eyecare/patient-history.png",
+        "/eyecare/tracking.png",
+      ],
       video: "/eyecare-saas-demo.mp4",
       description:
-        "A comprehensive practice management system built specifically for eye clinics. Features include patient records management, appointment scheduling, billing and invoicing, prescription management, and compliance with healthcare regulations for streamlined clinic operations.",
+        "Multi-tenant SaaS for eye clinic chains — multi-org isolation, branch-level access control, triple-layer prescription validation, 3 order types with 6-stage factory tracking, public patient self-booking, and financial reporting. Built with .NET ASP Core + React + PostgreSQL.",
       techs: [
         { name: ".NET ASP", color: "purple" },
         { name: "React", color: "cyan" },

@@ -14,12 +14,21 @@ const heroSlides = [
   { title: "Organisation Registration", image: "/eyecare/registration.png" },
   { title: "Branch Selection", image: "/eyecare/branch-select.png" },
   { title: "Prescription Form", image: "/eyecare/prescriptionform.png" },
+  { title: "Appointment Scheduling", image: "/eyecare/appointment.png" },
+  { title: "Order Tracking", image: "/eyecare/tracking.png" },
+  { title: "Inventory Management", image: "/eyecare/inventory-management.png" },
+  { title: "Financial Reports", image: "/eyecare/payment-report.png" },
+  { title: "Orders List", image: "/eyecare/order-list.png" },
+  { title: "Patient History", image: "/eyecare/patient-history.png" },
 ];
 
 const metrics = [
   { value: "Multi-Tenant", label: "Single DB, Zero Data Leakage" },
   { value: "Unlimited", label: "Branches per Organisation" },
   { value: "3-Layer", label: "Medical Data Validation" },
+  { value: "6-Stage", label: "Factory Order Tracking" },
+  { value: "Public", label: "Patient Self-Booking" },
+  { value: "3 Types", label: "Order Workflows" },
 ];
 
 const techStack = [
@@ -127,7 +136,7 @@ const features: FeatureProps[] = [
       { value: "3-layer", label: "Validation depth" },
       { value: "100%", label: "Medical data integrity" },
     ],
-    images: ["/eyecare/prescriptionform.png"],
+    images: ["/eyecare/prescriptionform.png", "/eyecare/refraction-form.png"],
     accentColor: "teal",
     isOdd: true,
   },
@@ -149,7 +158,7 @@ const features: FeatureProps[] = [
       { value: "Automated", label: "Factory order flow" },
       { value: "Zero", label: "Variant tracking errors" },
     ],
-    images: ["/eyecare/stock.png"],
+    images: ["/eyecare/stock.png", "/eyecare/inventory-management.png"],
     accentColor: "emerald",
     isOdd: false,
   },
@@ -171,9 +180,75 @@ const features: FeatureProps[] = [
       { value: "Instant", label: "Prescription-to-invoice" },
       { value: "Complete", label: "Long-term history" },
     ],
-    images: ["/eyecare/patient-register.png", "/eyecare/factory-order.png", "/eyecare/lensfilter.png"],
+    images: ["/eyecare/patient-register.png", "/eyecare/patient-history.png", "/eyecare/factory-order.png", "/eyecare/lensfilter.png"],
     accentColor: "cyan",
     isOdd: true,
+  },
+  {
+    tag: "Order Management",
+    title: "Three Order Types. One Unified System.",
+    subtitle: "Factory → Frame-Only → Normal. Each with its own optimised workflow.",
+    body: "Optical practices don't fit a single order model — a custom prescription eyeglass order is fundamentally different from a walk-in frame sale. I built three independent order flows with shared payment infrastructure: Factory Orders with 6-stage manufacturing tracking, Frame-Only Orders with 4-stage fulfilment, and Normal Orders for accessories and services. Every order type supports split payments across Cash, Card, and Online Transfer.",
+    highlights: [
+      "Factory Orders: patient refraction auto-loaded, in-stock lenses filtered to prescription SPH/CYL automatically",
+      "6-stage factory tracking: Received → Sent to Factory → Received → Sent to Fitting → Fitting Complete → Issued",
+      "Frame-Only Orders: simplified flow, 4-stage tracking — no prescription data required",
+      "Normal Orders: free-text line items for accessories, solutions, and clinic services",
+      "Split payment support on all order types — Cash, Card, and Online Transfer in a single transaction",
+      "On-Hold and Urgent flags, plus internal remarks attached to any order",
+    ],
+    impact: [
+      { value: "6-Stage", label: "Factory tracking" },
+      { value: "3 Types", label: "Order workflows" },
+      { value: "Split", label: "Payment methods" },
+    ],
+    images: ["/eyecare/factory-order-form.png", "/eyecare/frame-only-order-form.png", "/eyecare/normal-order-form.png", "/eyecare/tracking.png", "/eyecare/trackign-table.png"],
+    accentColor: "indigo",
+    isOdd: false,
+  },
+  {
+    tag: "Appointment Scheduling",
+    title: "Public Self-Booking. No Login Required.",
+    subtitle: "Patients book 24/7 via your clinic's public URL — staff just manage arrivals.",
+    body: "Scheduling is the most patient-facing part of a clinic. I built a public booking system where patients visit your clinic's unique URL, pick a date and time slot, enter their details, and confirm — no account needed. The backend checks for existing patients by mobile or NIC to avoid duplicates. Admins set up doctor availability rules per branch (day, time range, slot duration, max bookings), and the system auto-generates the bookable slots — double-booking is architecturally impossible.",
+    highlights: [
+      "Patients self-book at /book/:clinic-slug — zero staff involvement for scheduling",
+      "Existing patient detection by mobile or NIC — no duplicate records created",
+      "Admin configures doctor rules: day of week, start/end time, slot duration, max bookings",
+      "System auto-generates time slots from rules — no manual slot entry",
+      "Dashboard filters appointments by branch, doctor, date, and status (Pending/Confirmed/Completed)",
+      "Mark Arrival, Confirm, or Cancel appointments directly from the admin view",
+    ],
+    impact: [
+      { value: "24/7", label: "Patient self-booking" },
+      { value: "Zero", label: "Double-bookings possible" },
+      { value: "Auto", label: "Slot generation" },
+    ],
+    images: ["/eyecare/appointment.png"],
+    accentColor: "teal",
+    isOdd: true,
+  },
+  {
+    tag: "Financial Reports",
+    title: "Revenue by Date, Order Type & Payment Method.",
+    subtitle: "Daily totals. Invoice breakdown. Audit-ready.",
+    body: "Clinic owners need to know what they collected, how, and from which order types — at a glance. The reports module provides daily revenue summaries broken down by Cash, Card, and Online Transfer, with per-order-type totals (Factory, Frame, Normal). Every invoice is listed with full payment split, and the repayment screen lets staff record partial or split payments against outstanding balances — with a full timestamped audit trail per invoice.",
+    highlights: [
+      "Grand Total + per-method breakdown (Cash, Card, Online) for any selected date",
+      "Per order type revenue: Factory, Normal, and Frame orders with invoice counts",
+      "Invoice table with patient name, order type, and per-method payment split",
+      "Filter by date range and order type — paginated and export-ready",
+      "Repayment screen: running balance, split payment entry, full payment history per invoice",
+      "Every payment logged with date, time, and method — complete audit trail",
+    ],
+    impact: [
+      { value: "Real-time", label: "Revenue summary" },
+      { value: "3-method", label: "Payment breakdown" },
+      { value: "Full", label: "Audit trail" },
+    ],
+    images: ["/eyecare/payment-report.png", "/eyecare/repayment.png"],
+    accentColor: "emerald",
+    isOdd: false,
   },
 ];
 
@@ -192,6 +267,11 @@ const skillGroups = [
     title: "Healthcare SaaS",
     color: "teal",
     skills: ["HIPAA Data Compliance", "Medical Form Validation", "Multi-Branch Operations", "Clinical Workflow Design", "Prescription Management", "Audit Trail Systems"],
+  },
+  {
+    title: "Order & Inventory",
+    color: "indigo",
+    skills: ["Factory Order Workflow", "6-Stage Order Tracking", "Split Payment Processing", "Inventory Variant Tracking", "Inter-Branch Stock Transfer", "Public Booking API"],
   },
 ];
 
@@ -241,7 +321,7 @@ const EyeCareSaaSShowcase: React.FC = () => {
                 </p>
 
                 {/* Metrics */}
-                <div className="mb-8 grid grid-cols-3 gap-4">
+                <div className="mb-8 grid grid-cols-3 gap-3">
                   {metrics.map((m) => (
                     <div key={m.value} className="rounded-xl border border-zinc-200 bg-slate-50 p-4 text-center">
                       <p className="text-xl font-bold leading-tight text-purple-600">{m.value}</p>
@@ -365,7 +445,7 @@ const EyeCareSaaSShowcase: React.FC = () => {
               What This Project Proves
             </h2>
 
-            <div className="grid gap-8 md:grid-cols-3">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
               {skillGroups.map((g) => (
                 <div key={g.title}>
                   <h4 className="mb-4 text-sm font-semibold uppercase tracking-widest text-zinc-400">
