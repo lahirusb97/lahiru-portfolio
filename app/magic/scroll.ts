@@ -4,6 +4,9 @@ export const scrollState = {
   smooth: 0, // eased value the camera follows
   mouseX: 0,
   mouseY: 0,
+  // Screen-space position (CSS px) of each station's medallion, written by the 3D scene
+  // every frame so the DOM overlay can make text emerge from the rune.
+  runes: Array.from({ length: 12 }, () => ({ x: 0, y: 0, r: 0, on: false })),
 };
 
 export function readScroll() {

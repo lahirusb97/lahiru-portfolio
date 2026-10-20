@@ -76,3 +76,9 @@ export const stations: Station[] = [
     ],
   },
 ];
+
+export type CharacterId = "mage" | "maria";
+export const CHARACTERS: { id: CharacterId; label: string }[] = [
+  { id: "mage", label: "Mage" },
+  { id: "maria", label: "Maria" },
+];

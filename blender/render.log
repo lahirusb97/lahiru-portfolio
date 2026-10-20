@@ -1,0 +1,85 @@
+00:05.537  blend            | Read blend: "/home/lahiru/my project/protfolio/lahiru-portfolio/blender/blossom_tree.blend"
+00:07.433  render           | Rendering single frame
+00:07.434  render           | Rendering frame 1
+00:07.436  render           | Start rendering: Scene, ViewLayer
+00:07.436  render           | Engine: Cycles
+00:16.696  render           | Fra: 1 | Mem: 0M | Synchronizing object | F
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+00:16.733  render           | Fra: 1 | Mem: 0M | Synchronizing object | L
+00:16.743  render           | Fra: 1 | Mem: 0M | Synchronizing object | T
+00:16.744  render           | Fra: 1 | Mem: 0M | Synchronizing object | Tree
+00:16.752  render           | Fra: 1 | Mem: 0M | Synchronizing object | GrassPatch
+00:16.752  render           | Fra: 1 | Mem: 0M | Synchronizing object | Ground
+00:16.752  render           | Fra: 1 | Mem: 0M | Synchronizing object | GrassPatch
+00:16.752  render           | Fra: 1 | Mem: 0M | Synchronizing object | MistVolume
+00:17.292  render           | Fra: 1 | Mem: 0M | Initializing
+00:17.396  render           | Fra: 1 | Mem: 0M | Waiting for render to start
+00:17.396  render           | Fra: 1 | Mem: 0M | Updating Scene
+00:17.396  render           | Fra: 1 | Mem: 0M | Updating Shaders
+00:17.396  render           | Fra: 1 | Mem: 0M | Loading render kernels (may take a few minutes the first time)
+00:17.405  render           | Fra: 1 | Mem: 1M | Updating Procedurals
+00:17.405  render           | Fra: 1 | Mem: 1M | Updating Background
+00:17.405  render           | Fra: 1 | Mem: 1M | Updating Scene Attribute
+00:17.405  render           | Fra: 1 | Mem: 1M | Updating Camera
+00:17.406  render           | Fra: 1 | Mem: 1M | Updating Meshes Flags
+00:17.406  render           | Fra: 1 | Mem: 1M | Updating Objects
+00:17.406  render           | Fra: 1 | Mem: 1M | Updating Objects | Copying Transformations to device
+00:17.406  render           | Fra: 1 | Mem: 3M | Updating Particle Systems
+00:17.406  render           | Fra: 1 | Mem: 3M | Updating Particle Systems | Copying Particles to device
+00:17.406  render           | Fra: 1 | Mem: 3M | Updating Meshes
+00:17.407  render           | Fra: 1 | Mem: 3M | Updating Objects | Applying Static Transformations
+00:17.407  render           | Fra: 1 | Mem: 3M | Updating Geometry BVH Flower 2/3 | Building BVH
+00:17.407  render           | Fra: 1 | Mem: 3M | Updating Geometry BVH FarTree 4/4 | Building BVH
+00:17.414  render           | Fra: 1 | Mem: 3M | Updating Geometry BVH FarTree 4/4 | Building BVH 0%
+00:17.571  render           | Fra: 1 | Mem: 3M | Updating Geometry BVH Plane.001 5/4 | Building BVH
+00:17.678  render           | Fra: 1 | Mem: 401M | Updating Geometry BVH Plane.001 5/4 | Building BVH 0%
+00:18.282  render           | Fra: 1 | Mem: 477M | Updating Geometry BVH Plane.001 5/4 | Building BVH 13%
+00:18.532  render           | Fra: 1 | Mem: 567M | Updating Geometry BVH Plane.001 5/4 | Building BVH 28%
+00:18.783  render           | Fra: 1 | Mem: 659M | Updating Geometry BVH Plane.001 5/4 | Building BVH 44%
+00:19.035  render           | Fra: 1 | Mem: 723M | Updating Geometry BVH Plane.001 5/4 | Building BVH 57%
+00:19.286  render           | Fra: 1 | Mem: 801M | Updating Geometry BVH Plane.001 5/4 | Building BVH 70%
+00:19.537  render           | Fra: 1 | Mem: 875M | Updating Geometry BVH Plane.001 5/4 | Building BVH 83%
+00:19.789  render           | Fra: 1 | Mem: 939M | Updating Geometry BVH Plane.001 5/4 | Building BVH 96%
+00:19.892  render           | Fra: 1 | Mem: 961M | Updating Scene BVH | Building
+00:19.892  render           | Fra: 1 | Mem: 961M | Updating Scene BVH | Building BVH
+00:19.922  render           | Fra: 1 | Mem: 969M | Updating Scene BVH | Copying BVH to device
+00:19.922  render           | Fra: 1 | Mem: 969M | Updating Mesh | Computing attributes
+00:20.125  render           | Fra: 1 | Mem: 969M | Updating Mesh | Copying Attributes to device
+00:20.126  render           | Fra: 1 | Mem: 1105M | Updating Mesh | Computing normals
+00:20.127  render           | Fra: 1 | Mem: 1105M | Updating Mesh | Copying Mesh to device
+00:20.127  render           | Fra: 1 | Mem: 1106M | Updating Mesh | Copying Curves to device
+00:20.172  render           | Fra: 1 | Mem: 1175M | Updating Objects Flags
+00:20.173  render           | Fra: 1 | Mem: 1175M | Updating Primitive Offsets
+00:20.173  render           | Fra: 1 | Mem: 1175M | Updating Images
+00:20.173  render           | Fra: 1 | Mem: 1175M | Updating Images | Loading sky_multiple_scattering
+00:20.357  render           | Fra: 1 | Mem: 1177M | Updating Volume
+00:20.500  render           | Fra: 1 | Mem: 1177M | Updating Volume | Evaluating density for MistVolume
+00:20.564  render           | Fra: 1 | Mem: 1177M | Updating Volume | Building octree for MistVolume
+00:20.564  render           | Fra: 1 | Mem: 1177M | Updating Camera Volume
+00:20.564  render           | Fra: 1 | Mem: 1177M | Updating Lookup Tables
+00:20.564  render           | Fra: 1 | Mem: 1177M | Updating Lights
+00:20.564  render           | Fra: 1 | Mem: 1177M | Updating Lights | Importance map
+00:20.575  render           | Fra: 1 | Mem: 1178M | Updating Lights | Computing tree
+00:20.576  render           | Fra: 1 | Mem: 1178M | Updating Integrator
+00:20.576  render           | Fra: 1 | Mem: 1178M | Updating Film
+00:20.576  render           | Fra: 1 | Mem: 1178M | Updating Lookup Tables
+00:20.576  render           | Fra: 1 | Mem: 1178M | Updating Baking
+00:20.576  render           | Fra: 1 | Mem: 1178M | Updating Device | Writing constant memory
+00:20.576  render           | Fra: 1 | Mem: 1178M | Loading denoising kernels (may take a few minutes the first time)
+00:20.576  render           | Fra: 1 | Mem: 1178M | Sample 0/96
+00:28.206  render           | Fra: 1 | Remaining: 12:04.87 | Mem: 1408M | Sample 1/96
+00:36.764  render           | Fra: 1 | Remaining: 12:40.81 | Mem: 1408M | Sample 2/96
+00:54.235  render           | Fra: 1 | Remaining: 12:54.14 | Mem: 1408M | Sample 4/96
+01:22.458  render           | Fra: 1 | Remaining: 11:20.70 | Mem: 1408M | Sample 8/96
+01:49.696  render           | Fra: 1 | Remaining: 10:23.83 | Mem: 1408M | Sample 12/96
+02:16.871  render           | Fra: 1 | Remaining: 09:41.47 | Mem: 1408M | Sample 16/96
+02:47.092  render           | Fra: 1 | Remaining: 09:16.76 | Mem: 1408M | Sample 20/96
+03:16.968  render           | Fra: 1 | Remaining: 08:48.79 | Mem: 1408M | Sample 24/96
+03:48.410  render           | Fra: 1 | Remaining: 08:24.73 | Mem: 1408M | Sample 28/96
+04:20.163  render           | Fra: 1 | Remaining: 07:59.17 | Mem: 1408M | Sample 32/96
+04:51.567  render           | Fra: 1 | Remaining: 07:31.65 | Mem: 1408M | Sample 36/96
+05:23.099  render           | Fra: 1 | Remaining: 07:03.53 | Mem: 1408M | Sample 40/96
+05:52.294  render           | Fra: 1 | Remaining: 06:32.02 | Mem: 1408M | Sample 44/96
+06:22.776  render           | Fra: 1 | Remaining: 06:02.20 | Mem: 1408M | Sample 48/96
+06:52.912  render           | Fra: 1 | Remaining: 05:31.97 | Mem: 1408M | Sample 52/96
+07:19.858  render           | Fra: 1 | Remaining: 04:59.48 | Mem: 1408M | Sample 56/96
