@@ -68,6 +68,7 @@ function SkyBackdrop() {
   const tex = useTexture(SKY, (t) => {
     t.mapping = THREE.EquirectangularReflectionMapping;
     t.colorSpace = THREE.SRGBColorSpace;
+    t.needsUpdate = true;
   });
   return <primitive attach="background" object={tex} />;
 }

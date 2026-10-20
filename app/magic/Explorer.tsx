@@ -205,6 +205,7 @@ export default function Explorer({ character }: { character: CharacterId }) {
     const tan = path.getTangentAt(u);
     st.face = Math.atan2(tan.x, tan.z);
     st.camYaw = st.face;
+    st.pos.z -= 3; st.camYaw -= 0.55; st.camPitch = 0.12; st.camDist = 4.5; // TEMP-SHOT
   }, []);
 
   // Input

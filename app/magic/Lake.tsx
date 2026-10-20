@@ -6,12 +6,15 @@ import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { Water } from "three/examples/jsm/objects/Water.js";
 import { PATH_LEN, path } from "./world";
+import { SHORE_MIN, SHORE_RANGE, lakeFragment, lakeVertex, shoreCommon } from "./lakeShader";
 
 const GRASS = ["diff", "nor_gl", "rough"].map((m) => `/models/sakura/grass_${m}_1k.jpg`);
 useTexture.preload(GRASS);
 
 export const WATER_Y = -0.14;
 const SHORE = 3; // metres of bank sloping down into the water
+// The bank (y = -0.9 * smoothstep over SHORE metres) meets the water this far inside the edge.
+const WATERLINE_INSET = 2.25;
 const CAP = 16; // the land runs this far past each end of the path, rounding off
 
 // Half-width of the land strip at distance s along the path: a wobbly shoreline that never
@@ -42,14 +45,88 @@ const smoothstep = (a: number, b: number, x: number) => {
   return t * t * (3 - 2 * t);
 };
 
-// Grassy strip the path runs along. Its edges slope under the water, and the grass darkens
-// to wet earth near the waterline.
+// Wave clock and shoreline map, shared by the water and the bank so their waves line up.
+const lakeTime = { value: 0 };
+let shoreMap: THREE.DataTexture | null = null;
+const getShoreMap = () => (shoreMap ??= makeShoreMap());
+
+// The bank's shader: each wave runs up the sand as a thin glossy sheet with a bubbly foam
+// edge, then drains back, leaving the sand dark and wet up to where it reached.
+function addSwash(mat: THREE.MeshStandardMaterial) {
+  mat.onBeforeCompile = (shader) => {
+    shader.uniforms.time = lakeTime;
+    shader.uniforms.shoreMap = { value: getShoreMap() };
+    shader.uniforms.shoreBounds = { value: shoreBoundsVec };
+    shader.vertexShader = shader.vertexShader
+      .replace("#include <common>", "#include <common>\nvarying vec3 vLakeWorld;")
+      .replace(
+        "#include <begin_vertex>",
+        "#include <begin_vertex>\nvLakeWorld = (modelMatrix * vec4(transformed, 1.0)).xyz;",
+      );
+    shader.fragmentShader = shader.fragmentShader
+      .replace(
+        "#include <common>",
+        `#include <common>
+        uniform float time;
+        uniform sampler2D shoreMap;
+        uniform vec4 shoreBounds;
+        varying vec3 vLakeWorld;
+        ${shoreCommon}
+        float swFilm = 0.0;
+        float swWet = 0.0;
+        float swFoam = 0.0;`,
+      )
+      .replace(
+        "#include <map_fragment>",
+        /* glsl */ `#include <map_fragment>
+        {
+          vec2 p = vLakeWorld.xz;
+          float up = -shoreAt(p);               // metres up the bank from the waterline
+          float c = fract(swashPhase(p, time));
+          float maxR = runupMax(p);
+          float reach = swashReach(c, maxR);
+          float edgeNoise = (vn(p * 3.0 + time * 0.2) - 0.5) * 0.18;
+          float r = reach + edgeNoise;
+          swFilm = smoothstep(r, r - 0.12, up) * step(-0.2, up);
+          // foam rides the leading edge on the way up; a thinner trail as it drains
+          float rushing = c < 0.3 ? 1.0 : 1.0 - smoothstep(0.3, 0.75, c);
+          float band = 1.0 - smoothstep(0.0, mix(0.12, 0.35, rushing), abs(up - r));
+          float lace = foamLace(p, time);
+          // bubbles stranded on the sand the water just left, popping as it drains
+          float stranded = (c > 0.3 ? 1.0 - smoothstep(0.3, 0.95, c) : 0.0)
+                         * smoothstep(r, r + 0.15, up) * smoothstep(maxR + 0.1, maxR - 0.2, up);
+          swFoam = clamp(lace * (band * (0.55 + 0.45 * rushing) + swFilm * 0.25 + stranded * 0.4), 0.0, 1.0) * step(-0.2, up);
+          // sand stays wet up to the highest reach, drying slowly above it
+          swWet = smoothstep(maxR + 0.35, maxR - 0.15, up) * step(-0.2, up);
+          diffuseColor.rgb *= 1.0 - 0.38 * swWet;
+          diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * vec3(0.55, 0.68, 0.66), swFilm * 0.7);
+          diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.88, 0.91, 0.9), swFoam * 0.85);
+        }`,
+      )
+      .replace(
+        "#include <roughnessmap_fragment>",
+        `#include <roughnessmap_fragment>
+        roughnessFactor = mix(roughnessFactor, 0.35, swWet * 0.7);
+        roughnessFactor = mix(roughnessFactor, 0.04, swFilm * (1.0 - swFoam));`,
+      )
+      .replace(
+        "#include <normal_fragment_maps>",
+        `#include <normal_fragment_maps>
+        normal = normalize(mix(normal, nonPerturbedNormal, swFilm * 0.85));`,
+      );
+  };
+  mat.customProgramCacheKey = () => "lake-bank-swash";
+}
+
+// Grassy strip the path runs along. Its edges slope under the water, and the grass gives way
+// to wet, sandy mud near the waterline.
 export function Land() {
   const [diff, nor, rough] = useTexture(GRASS, (texs) => {
     texs.forEach((t, i) => {
       t.wrapS = t.wrapT = THREE.RepeatWrapping;
       t.anisotropy = 8;
       t.colorSpace = i === 0 ? THREE.SRGBColorSpace : THREE.NoColorSpace;
+      t.needsUpdate = true; // re-upload: wrap mode and colour space were set after load
     });
   });
   const geo = useMemo(() => {
@@ -73,8 +150,10 @@ export function Land() {
         const z = p.z + side.z * d;
         pos.push(x, y, z);
         uv.push(x * 0.35, z * 0.35);
-        const wet = 1 - 0.55 * smoothstep(inner - 1.2, inner + 0.6, ad);
-        col.push(wet, wet * 0.97, wet * 0.9);
+        // grass gives way to damp, sandy mud at the waterline
+        const mud = smoothstep(inner - 1.6, inner + 0.7, ad);
+        const dark = 1 - 0.3 * smoothstep(inner + 0.5, w, ad);
+        col.push((1 - 0.2 * mud) * dark, (1 - 0.36 * mud) * dark, (1 - 0.55 * mud) * dark);
       }
       if (i < line.length - 1) {
         const a = i * M;
@@ -90,18 +169,19 @@ export function Land() {
     g.computeVertexNormals();
     return g;
   }, []);
-  return (
-    <mesh geometry={geo} receiveShadow>
-      <meshStandardMaterial
-        map={diff}
-        normalMap={nor}
-        roughnessMap={rough}
-        vertexColors
-        color="#c9d6b0"
-        envMapIntensity={0.6}
-      />
-    </mesh>
-  );
+  const mat = useMemo(() => {
+    const m = new THREE.MeshStandardMaterial({
+      map: diff,
+      normalMap: nor,
+      roughnessMap: rough,
+      vertexColors: true,
+      color: "#c9d6b0",
+      envMapIntensity: 0.6,
+    });
+    addSwash(m);
+    return m;
+  }, [diff, nor, rough]);
+  return <mesh geometry={geo} material={mat} receiveShadow />;
 }
 
 // Tileable ripple normal map, built from a sum of waves with whole-number frequencies so it
@@ -109,9 +189,9 @@ export function Land() {
 function makeWaterNormals(size = 256) {
   let seed = 12345;
   const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-  const waves = Array.from({ length: 28 }, () => {
-    const kx = Math.round((rnd() - 0.5) * 24);
-    const ky = Math.round((rnd() - 0.5) * 24);
+  const waves = Array.from({ length: 48 }, () => {
+    const kx = Math.round((rnd() - 0.5) * 30);
+    const ky = Math.round((rnd() - 0.5) * 30);
     const k = Math.hypot(kx, ky) || 1;
     return { kx, ky, a: 1 / Math.pow(k, 1.3), ph: rnd() * Math.PI * 2 };
   });
@@ -145,33 +225,66 @@ function makeWaterNormals(size = 256) {
   return tex;
 }
 
-// Ripple clock, shared with the water shader.
-const lakeTime = { value: 0 };
+// Signed distance (m) from the waterline for the area around the land, stored as a small
+// 1 m-per-texel map. Negative on land, positive over the lake.
+const SHORE_BOUNDS = { minX: -64, minZ: -245, sizeX: 128, sizeZ: 325 };
+const shoreBoundsVec = new THREE.Vector4(SHORE_BOUNDS.minX, SHORE_BOUNDS.minZ, SHORE_BOUNDS.sizeX, SHORE_BOUNDS.sizeZ);
+function makeShoreMap() {
+  const W = SHORE_BOUNDS.sizeX;
+  const H = SHORE_BOUNDS.sizeZ;
+  const line = centreLine(1.2);
+  const data = new Uint8Array(W * H);
+  for (let j = 0; j < H; j++)
+    for (let i = 0; i < W; i++) {
+      const x = SHORE_BOUNDS.minX + i + 0.5;
+      const z = SHORE_BOUNDS.minZ + j + 0.5;
+      let d = Infinity;
+      for (const { p, w } of line) d = Math.min(d, Math.hypot(x - p.x, z - p.z) - (w - WATERLINE_INSET));
+      data[j * W + i] = Math.round(Math.min(1, Math.max(0, (d - SHORE_MIN) / SHORE_RANGE)) * 255);
+    }
+  const tex = new THREE.DataTexture(data, W, H, THREE.RedFormat);
+  tex.magFilter = tex.minFilter = THREE.LinearFilter;
+  tex.needsUpdate = true;
+  return tex;
+}
 
-// A calm lake: planar reflection of the trees and sky, Fresnel, sun glints and slow ripples.
+// The lake: three's Water supplies the planar mirror; the surface itself is our own shader
+// (Gerstner swell, gusty ripples, depth colour, see-through shallows, shoreline foam).
 export function Lake({ sunDirection }: { sunDirection: THREE.Vector3 }) {
   const water = useMemo(() => {
-    const w = new Water(new THREE.PlaneGeometry(900, 900), {
+    const w = new Water(new THREE.PlaneGeometry(600, 600, 400, 400), {
       textureWidth: 512,
       textureHeight: 512,
       waterNormals: makeWaterNormals(),
       sunDirection: sunDirection.clone(),
       sunColor: 0xfff4e2,
-      waterColor: 0x23474a,
-      distortionScale: 0.9,
       fog: true,
     });
     w.rotation.x = -Math.PI / 2;
     w.position.set(0, WATER_Y, -80);
-    const u = (w.material as THREE.ShaderMaterial).uniforms;
-    u.size.value = 6;
-    u.time = lakeTime;
+    const mat = w.material as THREE.ShaderMaterial;
+    mat.uniforms.time = lakeTime;
+    mat.uniforms.shoreMap = { value: getShoreMap() };
+    mat.uniforms.shoreBounds = { value: shoreBoundsVec };
+    mat.vertexShader = lakeVertex;
+    mat.fragmentShader = lakeFragment;
+    mat.transparent = true;
+    mat.needsUpdate = true;
     return w;
   }, [sunDirection]);
 
   useFrame((_, dt) => {
-    lakeTime.value += dt * 0.35;
+    lakeTime.value += dt;
   });
 
-  return <primitive object={water} />;
+  return (
+    <>
+      <primitive object={water} />
+      {/* muddy lake bed, seen through the shallows */}
+      <mesh rotation-x={-Math.PI / 2} position={[0, -1.4, -80]}>
+        <planeGeometry args={[600, 600]} />
+        <meshStandardMaterial color="#3b3826" roughness={1} />
+      </mesh>
+    </>
+  );
 }

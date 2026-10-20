@@ -50,6 +50,72 @@ export const treeSpots = (() => {
 // Footprints for walking collision.
 export const treeTrunks = treeSpots.map((t) => ({ x: t.x, z: t.z, r: 0.45 * t.scale }));
 
+// Classic sakura pink: a deep rose eye, pink through the petal, softening to pale blush at
+// the tips. Colours are linear (vertex colours aren't gamma-decoded).
+const SAKURA = {
+  eye: new THREE.Color(0.55, 0.05, 0.16),
+  mid: new THREE.Color(0.96, 0.33, 0.47),
+  edge: new THREE.Color(1.0, 0.6, 0.7),
+  bud: new THREE.Color(0.78, 0.12, 0.3),
+  budTip: new THREE.Color(0.95, 0.32, 0.48),
+};
+
+// Repaint a flower mesh from the centre outward (petals run ~0 -> 1 from the middle).
+function paintPetals(src: THREE.BufferGeometry, inner: THREE.Color, mid: THREE.Color, outer: THREE.Color) {
+  const g = src.clone();
+  const pos = g.attributes.position;
+  const col = new Float32Array(pos.count * 3);
+  const c = new THREE.Color();
+  for (let i = 0; i < pos.count; i++) {
+    const r = Math.min(1, Math.hypot(pos.getX(i), pos.getY(i), pos.getZ(i)));
+    if (r < 0.3) c.lerpColors(inner, mid, THREE.MathUtils.smoothstep(r, 0.0, 0.3));
+    else c.lerpColors(mid, outer, THREE.MathUtils.smoothstep(r, 0.3, 0.95));
+    c.toArray(col, i * 3);
+  }
+  g.setAttribute("color", new THREE.BufferAttribute(col, 3));
+  return g;
+}
+
+// A young sakura leaf: pointed oval, folded up along the midrib and drooping toward the tip,
+// with a finely toothed edge. Fresh green with a bronze flush, as sakura leaves open with the
+// blossom. Length runs along +x (0..1), the blade faces +y, matching the baked leaf frame.
+function makeLeaf() {
+  const NU = 12;
+  const NV = 7;
+  const pos: number[] = [];
+  const col: number[] = [];
+  const idx: number[] = [];
+  const green = new THREE.Color(0.1, 0.27, 0.04);
+  const bronze = new THREE.Color(0.32, 0.15, 0.05);
+  const c = new THREE.Color();
+  for (let i = 0; i < NU; i++) {
+    const u = i / (NU - 1);
+    const half = 0.2 * Math.sin(Math.PI * Math.pow(u, 0.75)) * (1 - 0.15 * u);
+    for (let j = 0; j < NV; j++) {
+      const v = -1 + (2 * j) / (NV - 1);
+      const edge = Math.abs(v) === 1;
+      const tooth = edge && i % 2 === 1 ? 1.07 : 1;
+      const z = v * half * tooth;
+      const y = 0.25 * Math.abs(z) - 0.12 * u * u; // midrib fold + droop
+      pos.push(u, y, z);
+      const vein = 1 - 0.18 * Math.exp(-Math.pow(v / 0.12, 2)); // paler midrib
+      c.lerpColors(green, bronze, 0.55 * THREE.MathUtils.smoothstep(u, 0.45, 1) + 0.25 * Math.abs(v));
+      col.push(c.r / vein, c.g / vein, c.b / vein);
+    }
+  }
+  for (let i = 0; i < NU - 1; i++)
+    for (let j = 0; j < NV - 1; j++) {
+      const a = i * NV + j;
+      idx.push(a, a + NV, a + 1, a + 1, a + NV, a + NV + 1);
+    }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute("color", new THREE.Float32BufferAttribute(col, 3));
+  g.setIndex(idx);
+  g.computeVertexNormals();
+  return g;
+}
+
 function petalMaterial() {
   const mat = new THREE.MeshStandardMaterial({
     vertexColors: true,
@@ -107,15 +173,22 @@ export function SakuraTrees() {
     const trunk = nodes.WEB_Trunk;
     const tm = (trunk.material as THREE.MeshStandardMaterial).clone();
     tm.envMapIntensity = 0.8;
+    tm.color.setRGB(0.62, 0.52, 0.5); // darker, red-grey sakura bark
     addWind(tm, 0.004, windTime);
     const fm = petalMaterial();
     addWind(fm, 0.012, windTime);
-    const lm = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.6, side: THREE.DoubleSide });
+    const lm = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.5, side: THREE.DoubleSide });
     addWind(lm, 0.012, windTime);
     return {
       trunkGeo: trunk.geometry,
       trunkMat: tm,
-      kindGeo: KINDS.map((k) => nodes[MESH_FOR[k]].geometry),
+      kindGeo: KINDS.map((k) => {
+        const g = nodes[MESH_FOR[k]].geometry;
+        if (k === "leaf") return makeLeaf();
+        if (k === "bud") return paintPetals(g, SAKURA.bud, SAKURA.bud, SAKURA.budTip);
+        if (k === "petal") return paintPetals(g, SAKURA.mid, SAKURA.mid, SAKURA.edge);
+        return paintPetals(g, SAKURA.eye, SAKURA.mid, SAKURA.edge);
+      }),
       flowerMat: fm,
       leafMat: lm,
       counts: buffers.map((b) => b.byteLength / 64),
@@ -134,7 +207,11 @@ export function SakuraTrees() {
         new THREE.Vector3(t.scale, t.scale, t.scale),
       ),
     );
-    KINDS.forEach((_, k) => {
+    const BLOOM = new THREE.Vector3(1.35, 1.35, 1.35);
+    // Each flower gets a slight tint, so some clusters read pinker and some paler.
+    const rnd = mulberry32(31);
+    const tint = new THREE.Color();
+    KINDS.forEach((kind, k) => {
       const mesh = refs.current[k];
       if (!mesh) return;
       const arr = new Float32Array(buffers[k]);
@@ -142,10 +219,16 @@ export function SakuraTrees() {
       for (const p of placements) {
         for (let j = 0; j < counts[k]; j++) {
           local.fromArray(arr, j * 16);
+          if (kind === "full" || kind === "half" || kind === "bud") local.scale(BLOOM); // fuller canopy
+          const r = rnd();
+          if (kind === "leaf") tint.setRGB(0.85 + 0.3 * r, 0.9 + 0.2 * r, 0.8 + 0.25 * rnd());
+          else tint.setRGB(1, 0.84 + 0.16 * r, 0.88 + 0.12 * r);
+          mesh.setColorAt(i, tint);
           mesh.setMatrixAt(i++, out.multiplyMatrices(p, local));
         }
       }
       mesh.instanceMatrix.needsUpdate = true;
+      if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
       mesh.computeBoundingSphere();
     });
     const tr = trunkRef.current;
@@ -184,6 +267,7 @@ export function FallingPetals({ count = 500 }: { count?: number }) {
   const { nodes } = useGLTF(TREE_URL) as unknown as { nodes: Record<string, THREE.Mesh> };
   const ref = useRef<THREE.InstancedMesh>(null);
   const mat = useMemo(() => petalMaterial(), []);
+  const geo = useMemo(() => paintPetals(nodes.WEB_Petal.geometry, SAKURA.mid, SAKURA.mid, SAKURA.edge), [nodes]);
   const seeds = useMemo(() => {
     const rnd = mulberry32(77);
     return Array.from({ length: count }, () => ({
@@ -221,5 +305,5 @@ export function FallingPetals({ count = 500 }: { count?: number }) {
     m.instanceMatrix.needsUpdate = true;
   });
 
-  return <instancedMesh ref={ref} args={[nodes.WEB_Petal.geometry, mat, count]} frustumCulled={false} />;
+  return <instancedMesh ref={ref} args={[geo, mat, count]} frustumCulled={false} />;
 }
